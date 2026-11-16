@@ -1,0 +1,903 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Flying Advisors | The global private aviation ecosystem</title>
+    <meta name="description" content="One call opens a network of more than 10,000 aircraft and 500 vetted operators, held to one standard." />
+    <meta name="theme-color" content="#000000" />
+
+    <!--
+      Motion is opt-in. Set the class before first paint so nothing flashes or
+      shifts (CLS 0). If the script bundle has not started within 4s, fall back
+      to the static layout.
+    -->
+    <script>
+      (function () {
+        var root = document.documentElement;
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          root.classList.add('has-motion');
+          setTimeout(function () {
+            if (!window.__siteReady) root.classList.remove('has-motion');
+          }, 4000);
+        }
+      })();
+    </script>
+
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      fetchpriority="high"
+      imagesrcset="
+        /assets/photos/hero-1280.avif 1280w,
+        /assets/photos/hero-1920.avif 1920w,
+        /assets/photos/hero-2560.avif 2560w,
+        /assets/photos/hero-3840.avif 3840w"
+      imagesizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+    />
+
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ===================================================================
+         Header
+         =================================================================== -->
+    <header class="site-header" data-header>
+      <nav class="main-nav" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="Flying Advisors, back to top">
+          <img class="brand__mark" src="/assets/brand/logo-mark.png" srcset="/assets/brand/logo-mark.png 1x, /assets/brand/logo-mark@2x.png 2x" width="46" height="46" alt="" />
+          <span class="brand__text">
+            <span class="brand__name">Flying Advisors</span>
+            <span class="brand__tag">Global private aviation ecosystem</span>
+          </span>
+        </a>
+
+        <ul class="main-nav__list">
+          <li><a href="#charter">Charter</a></li>
+          <li><a href="#emptylegs">Empty legs</a></li>
+          <li><a href="#sales">Buy &amp; sell</a></li>
+          <li><a href="#operators">Operators</a></li>
+          <li><a class="nav-cta" href="#quote">Request a quote</a></li>
+        </ul>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+          <span class="menu-toggle__label">Menu</span>
+          <span class="menu-toggle__lines" aria-hidden="true"><span></span><span></span></span>
+        </button>
+      </nav>
+
+      <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+        <ul class="mobile-menu__list">
+          <li><a href="#charter">Charter</a></li>
+          <li><a href="#emptylegs">Empty legs</a></li>
+          <li><a href="#sales">Buy &amp; sell</a></li>
+          <li><a href="#operators">Operators</a></li>
+          <li><a href="#quote">Request a quote</a></li>
+        </ul>
+        <div class="mobile-menu__desk">
+          <p>Global operations desk · Open 24 hours · 365 days</p>
+          <a href="tel:+0000000000" data-phone>+[Global number]</a>
+          <a href="#contact" data-whatsapp>WhatsApp an advisor</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- =================================================================
+           1. Hero
+           ================================================================= -->
+      <section class="hero" id="top" data-hero aria-labelledby="hero-headline">
+        <div class="hero__media" aria-hidden="true">
+          <div class="hero__img" data-hero-img>
+            <picture>
+              <source type="image/avif" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+                srcset="/assets/photos/hero-1280.avif 1280w, /assets/photos/hero-1920.avif 1920w, /assets/photos/hero-2560.avif 2560w, /assets/photos/hero-3840.avif 3840w" />
+              <source type="image/webp" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+                srcset="/assets/photos/hero-1280.webp 1280w, /assets/photos/hero-1920.webp 1920w, /assets/photos/hero-2560.webp 2560w, /assets/photos/hero-3840.webp 3840w" />
+              <img class="photo photo--hero" src="/assets/photos/hero-1920.jpg" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+                srcset="/assets/photos/hero-1280.jpg 1280w, /assets/photos/hero-1920.jpg 1920w, /assets/photos/hero-2560.jpg 2560w, /assets/photos/hero-3840.jpg 3840w"
+                width="3840" height="2560" alt="" fetchpriority="high" decoding="async" />
+            </picture>
+          </div>
+          <div class="hero__shade" data-hero-shade></div>
+        </div>
+
+        <div class="hero__inner">
+          <!-- Left: headline -->
+          <div class="hero__copy">
+            <p class="eyebrow" data-hero-fade>The global private aviation ecosystem</p>
+            <h1 class="hero__headline" id="hero-headline" data-headline>The art of<br /> arriving differently.</h1>
+            <span class="rule hero__rule" data-hero-rule aria-hidden="true"></span>
+            <p class="hero__lede" data-hero-fade>When the meeting moves, the family gathers or the deal closes on another continent, you need certainty, not a search. One call opens a network of more than 10,000 aircraft, held to one standard.</p>
+            <div class="hero__actions" data-hero-fade>
+              <a class="button button--primary" href="#quote">Get options in minutes</a>
+              <a class="button button--quiet" href="#contact">Speak to an advisor</a>
+            </div>
+            <dl class="stats" data-hero-fade>
+              <div class="stats__item"><dt class="stats__value">10,000<span>+</span></dt><dd class="stats__label">Aircraft in network</dd></div>
+              <div class="stats__item"><dt class="stats__value">500<span>+</span></dt><dd class="stats__label">Vetted operators</dd></div>
+              <div class="stats__item"><dt class="stats__value">24/7</dt><dd class="stats__label">Global desk</dd></div>
+              <div class="stats__item"><dt class="stats__value">[XX]</dt><dd class="stats__label">Countries served</dd></div>
+            </dl>
+          </div>
+
+          <!-- Right: the quote form -->
+          <div class="quote-panel" id="quote" data-hero-panel>
+            <form class="quote-form" data-quote-form novalidate aria-labelledby="quote-title">
+              <h3 class="quote-form__title" id="quote-title">How may we serve you?</h3>
+
+              <div class="tabs" role="tablist" aria-label="Enquiry type">
+                <button class="tabs__tab" type="button" role="tab" id="tab-fly" aria-controls="panel-fly" aria-selected="true" data-tab="fly">Fly</button>
+                <button class="tabs__tab" type="button" role="tab" id="tab-buy" aria-controls="panel-buy" aria-selected="false" tabindex="-1" data-tab="buy">Buy</button>
+                <button class="tabs__tab" type="button" role="tab" id="tab-sell" aria-controls="panel-sell" aria-selected="false" tabindex="-1" data-tab="sell">Sell</button>
+              </div>
+              <input type="hidden" name="type" value="fly" data-type-input />
+
+              <!-- Fly -->
+              <fieldset class="quote-form__panel" id="panel-fly" role="tabpanel" aria-labelledby="tab-fly" data-panel="fly">
+                <div class="pills" role="radiogroup" aria-label="Trip type">
+                  <label class="pill"><input type="radio" name="trip" value="one-way" checked data-trip /><span>One-way</span></label>
+                  <label class="pill"><input type="radio" name="trip" value="return" data-trip /><span>Return</span></label>
+                  <label class="pill"><input type="radio" name="trip" value="multi-leg" data-trip /><span>Multi-leg</span></label>
+                </div>
+
+                <div class="field-grid field-grid--2">
+                  <div class="field" data-field>
+                    <label class="field__label" for="q-from">From</label>
+                    <input class="field__input" id="q-from" name="from" type="text" required placeholder="City or airport" autocomplete="off" aria-describedby="q-from-error" />
+                    <span class="field__focus" aria-hidden="true"></span>
+                    <p class="field__error" id="q-from-error" data-field-error></p>
+                  </div>
+                  <div class="field" data-field>
+                    <label class="field__label" for="q-to">To</label>
+                    <input class="field__input" id="q-to" name="to" type="text" required placeholder="City or airport" autocomplete="off" aria-describedby="q-to-error" />
+                    <span class="field__focus" aria-hidden="true"></span>
+                    <p class="field__error" id="q-to-error" data-field-error></p>
+                  </div>
+                  <div class="field" data-field>
+                    <label class="field__label" for="q-departure">Departure</label>
+                    <input class="field__input" id="q-departure" name="departure" type="date" required aria-describedby="q-departure-error" data-date-min />
+                    <span class="field__focus" aria-hidden="true"></span>
+                    <p class="field__error" id="q-departure-error" data-field-error></p>
+                  </div>
+                  <div class="field" data-field data-return-field hidden>
+                    <label class="field__label" for="q-return">Return</label>
+                    <input class="field__input" id="q-return" name="return" type="date" disabled aria-describedby="q-return-error" data-date-min />
+                    <span class="field__focus" aria-hidden="true"></span>
+                    <p class="field__error" id="q-return-error" data-field-error></p>
+                  </div>
+                </div>
+
+                <div class="option-row">
+                  <div class="stepper" data-stepper data-min="1" data-max="50">
+                    <span class="field__label" id="guests-label">Guests</span>
+                    <div class="stepper__control" role="group" aria-labelledby="guests-label">
+                      <button class="stepper__button" type="button" aria-label="Fewer guests" data-step="-1">−</button>
+                      <output class="stepper__value" aria-live="polite" data-step-value>2</output>
+                      <button class="stepper__button" type="button" aria-label="More guests" data-step="1">+</button>
+                    </div>
+                    <input type="hidden" name="guests" value="2" data-step-input />
+                  </div>
+
+                  <div class="field field--inline" data-field>
+                    <label class="field__label" for="q-baggage">Baggage</label>
+                    <input class="field__input" id="q-baggage" name="baggage" type="text" placeholder="e.g. 4 suitcases, 1 golf bag" aria-describedby="q-baggage-error" />
+                    <span class="field__focus" aria-hidden="true"></span>
+                    <p class="field__error" id="q-baggage-error" data-field-error></p>
+                  </div>
+                </div>
+
+                <div class="pets">
+                  <span class="field__label" id="pets-label">Furry friends</span>
+                  <div class="pills pills--compact" role="radiogroup" aria-labelledby="pets-label">
+                    <label class="pill"><input type="radio" name="pets" value="no" checked data-pets /><span>No</span></label>
+                    <label class="pill"><input type="radio" name="pets" value="yes" data-pets /><span>Yes</span></label>
+                  </div>
+                  <div class="stepper stepper--inline" data-stepper data-min="1" data-max="10" data-pets-count hidden>
+                    <span class="field__label" id="pets-count-label">How many?</span>
+                    <div class="stepper__control" role="group" aria-labelledby="pets-count-label">
+                      <button class="stepper__button" type="button" aria-label="Fewer pets" data-step="-1">−</button>
+                      <output class="stepper__value" aria-live="polite" data-step-value>1</output>
+                      <button class="stepper__button" type="button" aria-label="More pets" data-step="1">+</button>
+                    </div>
+                    <input type="hidden" name="petCount" value="1" data-step-input disabled />
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Buy -->
+              <fieldset class="quote-form__panel" id="panel-buy" role="tabpanel" aria-labelledby="tab-buy" data-panel="buy" hidden disabled>
+                <div class="field" data-field>
+                  <label class="field__label" for="q-mission">Typical mission</label>
+                  <input class="field__input" id="q-mission" name="mission" type="text" required placeholder="e.g. Mumbai–London non-stop, 8 guests" aria-describedby="q-mission-error" />
+                  <span class="field__focus" aria-hidden="true"></span>
+                  <p class="field__error" id="q-mission-error" data-field-error></p>
+                </div>
+                <div class="field-grid field-grid--2">
+                  <div class="field" data-field>
+                    <label class="field__label" for="q-budget">Budget (USD)</label>
+                    <input class="field__input" id="q-budget" name="budget" type="text" placeholder="Range" aria-describedby="q-budget-error" />
+                    <span class="field__focus" aria-hidden="true"></span>
+                    <p class="field__error" id="q-budget-error" data-field-error></p>
+                  </div>
+                  <div class="field" data-field>
+                    <label class="field__label" for="q-timeline">Timeline</label>
+                    <input class="field__input" id="q-timeline" name="timeline" type="text" placeholder="e.g. 6 months" aria-describedby="q-timeline-error" />
+                    <span class="field__focus" aria-hidden="true"></span>
+                    <p class="field__error" id="q-timeline-error" data-field-error></p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <!-- Sell -->
+              <fieldset class="quote-form__panel" id="panel-sell" role="tabpanel" aria-labelledby="tab-sell" data-panel="sell" hidden disabled>
+                <div class="field" data-field>
+                  <label class="field__label" for="q-model">Aircraft make &amp; model</label>
+                  <input class="field__input" id="q-model" name="model" type="text" required placeholder="e.g. Challenger 350" aria-describedby="q-model-error" />
+                  <span class="field__focus" aria-hidden="true"></span>
+                  <p class="field__error" id="q-model-error" data-field-error></p>
+                </div>
+                <div class="field-grid field-grid--2">
+                  <div class="field" data-field>
+                    <label class="field__label" for="q-year">Year</label>
+                    <input class="field__input" id="q-year" name="year" type="text" inputmode="numeric" pattern="\d{4}" placeholder="YYYY" aria-describedby="q-year-error" />
+                    <span class="field__focus" aria-hidden="true"></span>
+                    <p class="field__error" id="q-year-error" data-field-error></p>
+                  </div>
+                  <div class="field" data-field>
+                    <label class="field__label" for="q-based">Based at</label>
+                    <input class="field__input" id="q-based" name="basedAt" type="text" placeholder="Country" aria-describedby="q-based-error" />
+                    <span class="field__focus" aria-hidden="true"></span>
+                    <p class="field__error" id="q-based-error" data-field-error></p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <div class="field" data-field>
+                <label class="field__label" for="q-mobile">Mobile or WhatsApp</label>
+                <input class="field__input" id="q-mobile" name="mobile" type="tel" required autocomplete="tel" pattern="[0-9+\(\)\-\s]{6,}" placeholder="+ country code" aria-describedby="q-mobile-error" />
+                <span class="field__focus" aria-hidden="true"></span>
+                <p class="field__error" id="q-mobile-error" data-field-error></p>
+              </div>
+
+              <button class="button button--primary button--block" type="submit" data-submit data-quote-cta>Submit your query</button>
+
+              <ul class="assurances">
+                <li><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5 L5.5 11 L12 3" /></svg>A named advisor replies personally, usually within 30 minutes</li>
+                <li><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M2 7.5 L5.5 11 L12 3" /></svg>No obligation. Your details are never shared.</li>
+              </ul>
+              <p class="form-status" role="status" aria-live="polite" data-status></p>
+            </form>
+            <p class="form-success" data-success tabindex="-1" hidden>Thank you. A named advisor will reply personally, usually within 30 minutes.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Memberships -->
+      <section class="assurance-bar" aria-label="Memberships and accreditations">
+        <div class="container">
+          <p class="eyebrow">Memberships &amp; accreditations</p>
+          <ul class="assurance-bar__logos">
+            <li>[Accreditation logo]</li>
+            <li>[Association logo]</li>
+            <li>[Safety audit partner]</li>
+            <li>[Escrow partner]</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           3. Tell us where you are
+           ================================================================= -->
+      <section class="photo-section" id="begin" aria-labelledby="begin-h">
+        <div class="photo-section__media" aria-hidden="true">
+          <div class="photo-section__img" data-parallax>
+            <picture>
+              <source type="image/avif" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+                srcset="/assets/photos/arrive-1280.avif 1280w, /assets/photos/arrive-1920.avif 1920w, /assets/photos/arrive-2560.avif 2560w, /assets/photos/arrive-3840.avif 3840w" />
+              <source type="image/webp" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+                srcset="/assets/photos/arrive-1280.webp 1280w, /assets/photos/arrive-1920.webp 1920w, /assets/photos/arrive-2560.webp 2560w, /assets/photos/arrive-3840.webp 3840w" />
+              <img class="photo photo--arrive" src="/assets/photos/arrive-1920.jpg" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+                srcset="/assets/photos/arrive-1280.jpg 1280w, /assets/photos/arrive-1920.jpg 1920w, /assets/photos/arrive-2560.jpg 2560w, /assets/photos/arrive-3840.jpg 3840w"
+                width="3840" height="2314" alt="" loading="lazy" decoding="async" />
+            </picture>
+          </div>
+          <div class="photo-section__shade"></div>
+        </div>
+
+        <div class="container photo-section__content">
+          <p class="eyebrow" data-reveal>We begin with you</p>
+          <h2 class="display display--lg" id="begin-h" data-split>Tell us where you are. <em>We will take it from there.</em></h2>
+          <p class="lede" data-reveal>Every client arrives with a different moment. We listen first, then put the whole ecosystem to work on that moment alone.</p>
+
+          <div class="moments" data-reveal-group>
+            <a class="moment" href="#quote" data-quote-tab="fly">
+              <span class="moment__index">i.</span>
+              <span class="moment__quote">“I have to be in another city tomorrow morning.”</span>
+              <span class="moment__body">On-demand charter, sourced across the network and confirmed in hours, not days.</span>
+              <span class="link-arrow">Plan my flight →</span>
+            </a>
+            <a class="moment" href="#quote" data-quote-tab="buy">
+              <span class="moment__index">ii.</span>
+              <span class="moment__quote">“We fly enough that owning may now make sense.”</span>
+              <span class="moment__body">Ownership counsel, global search, negotiation and closing, with nothing left to chance.</span>
+              <span class="link-arrow">Explore acquisition →</span>
+            </a>
+            <a class="moment" href="#quote" data-quote-tab="sell">
+              <span class="moment__index">iii.</span>
+              <span class="moment__quote">“It is time to sell our aircraft, quietly.”</span>
+              <span class="moment__body">Confidential marketing to qualified buyers worldwide, at a price the market will defend.</span>
+              <span class="link-arrow">Value my aircraft →</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           4. Operators
+           ================================================================= -->
+      <section class="photo-section photo-section--quiet" id="operators" aria-labelledby="operators-h">
+        <div class="photo-section__media" aria-hidden="true">
+          <div class="photo-section__img" data-parallax>
+            <picture>
+              <source type="image/avif" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+                srcset="/assets/photos/operators-1280.avif 1280w, /assets/photos/operators-1920.avif 1920w, /assets/photos/operators-2560.avif 2560w, /assets/photos/operators-3840.avif 3840w" />
+              <source type="image/webp" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+                srcset="/assets/photos/operators-1280.webp 1280w, /assets/photos/operators-1920.webp 1920w, /assets/photos/operators-2560.webp 2560w, /assets/photos/operators-3840.webp 3840w" />
+              <img class="photo photo--operators" src="/assets/photos/operators-1920.jpg" sizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
+                srcset="/assets/photos/operators-1280.jpg 1280w, /assets/photos/operators-1920.jpg 1920w, /assets/photos/operators-2560.jpg 2560w, /assets/photos/operators-3840.jpg 3840w"
+                width="3840" height="2880" alt="" loading="lazy" decoding="async" />
+            </picture>
+          </div>
+          <div class="photo-section__shade"></div>
+        </div>
+
+        <div class="container container--narrow photo-section__content">
+          <p class="eyebrow" data-reveal>Operator network</p>
+          <h2 class="display display--lg" id="operators-h" data-split>“We operate aircraft and want better utilisation.”</h2>
+          <p class="lede" data-reveal>Join the operator network and meet demand from clients on every continent.</p>
+          <div data-reveal>
+            <a class="button button--primary" href="#partner">Become a partner</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           5. Ecosystem / network
+           ================================================================= -->
+      <section class="section network" id="ecosystem" aria-labelledby="eco-h">
+        <div class="container network__content">
+          <p class="eyebrow" data-reveal>Not a broker. An ecosystem.</p>
+          <h2 class="display display--lg" id="eco-h" data-split>A typical broker knows a few operators. <em>We built a network around the world.</em></h2>
+          <p class="lede" data-reveal>Scale is what makes a promise dependable. With 500+ operators and 10,000+ aircraft across every region, we can find the right aircraft, at the right price, often already positioned near you, and keep a back-up ready if plans change.</p>
+
+          <figure class="network-map" data-reveal>
+            <svg viewBox="0 60 1000 330" role="img" aria-label="Map of the Flying Advisors network linking hubs across the Americas, Europe, the Middle East, Africa, India and Asia-Pacific">
+              <g class="network-map__grid">
+                <path d="M0 83.3 H1000 M0 125 H1000 M0 166.7 H1000 M0 208.3 H1000 M0 250 H1000 M0 291.7 H1000 M0 333.3 H1000 M0 375 H1000" />
+                <path d="M83.3 60 V390 M166.7 60 V390 M250 60 V390 M333.3 60 V390 M416.7 60 V390 M500 60 V390 M583.3 60 V390 M666.7 60 V390 M750 60 V390 M833.3 60 V390 M916.7 60 V390" />
+              </g>
+              <g class="network-map__routes" data-map-routes>
+                <path d="M702 197 Q600 90 500 107" /><path d="M654 180 Q590 120 517 122" /><path d="M500 107 Q400 60 294 137" />
+                <path d="M294 137 Q232 110 172 156" /><path d="M294 137 Q350 220 370 315" /><path d="M702 197 Q680 170 654 180" />
+                <path d="M654 180 Q640 220 602 254" /><path d="M714 171 Q760 180 788 246" /><path d="M788 246 Q880 260 920 344" />
+                <path d="M817 188 Q850 140 888 151" /><path d="M654 180 Q740 130 817 188" /><path d="M500 107 Q515 112 520 129" />
+                <path d="M630 181 Q560 140 517 122" /><path d="M702 197 Q650 280 602 254" />
+              </g>
+              <g class="network-map__long">
+                <path d="M172 156 Q520 0 888 151" /><path d="M370 315 Q480 300 602 254" /><path d="M500 107 Q700 40 888 151" />
+              </g>
+              <g class="network-map__hubs">
+                <circle cx="172" cy="156" r="3" /><circle cx="294" cy="137" r="3.6" /><circle cx="370" cy="315" r="3" />
+                <circle cx="500" cy="107" r="3.6" /><circle cx="517" cy="122" r="2.6" /><circle cx="520" cy="129" r="2.6" />
+                <circle cx="630" cy="181" r="2.6" /><circle cx="654" cy="180" r="3.6" /><circle cx="602" cy="254" r="3" />
+                <circle cx="702" cy="197" r="3.6" /><circle cx="714" cy="171" r="3" /><circle cx="788" cy="246" r="3.6" />
+                <circle cx="817" cy="188" r="3" /><circle cx="888" cy="151" r="3" /><circle cx="920" cy="344" r="3" />
+              </g>
+              <g class="network-map__rings">
+                <circle cx="294" cy="137" r="8" /><circle cx="500" cy="107" r="8" /><circle cx="654" cy="180" r="8" />
+                <circle cx="702" cy="197" r="8" /><circle cx="788" cy="246" r="8" />
+              </g>
+              <g class="network-map__labels">
+                <text x="150" y="176">LOS ANGELES</text><text x="270" y="126">NEW YORK</text><text x="378" y="330">SÃO PAULO</text>
+                <text x="472" y="96">LONDON</text><text x="530" y="118">GENEVA</text><text x="502" y="146">NICE</text>
+                <text x="604" y="200">RIYADH</text><text x="660" y="172">DUBAI</text><text x="572" y="272">NAIROBI</text>
+                <text x="690" y="216">MUMBAI</text><text x="722" y="166">DELHI</text><text x="772" y="266">SINGAPORE</text>
+                <text x="826" y="196">HONG KONG</text><text x="896" y="146">TOKYO</text><text x="928" y="360">SYDNEY</text>
+              </g>
+            </svg>
+            <figcaption class="network-map__caption">Illustrative network · Not to scale</figcaption>
+          </figure>
+
+          <dl class="regions" data-reveal-group>
+            <div><dt>Americas</dt><dd>New York · Miami · Los Angeles · São Paulo</dd></div>
+            <div><dt>Europe</dt><dd>London · Geneva · Nice · Paris</dd></div>
+            <div><dt>Middle East &amp; Africa</dt><dd>Dubai · Riyadh · Doha · Nairobi</dd></div>
+            <div><dt>India &amp; South Asia</dt><dd>Mumbai · Delhi · Bengaluru · Colombo</dd></div>
+            <div><dt>Asia-Pacific</dt><dd>Singapore · Hong Kong · Tokyo · Sydney</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           6. Services
+           ================================================================= -->
+      <section class="section" id="charter" aria-labelledby="svc-h">
+        <div class="container">
+          <header class="section__head">
+            <p class="eyebrow" data-reveal>One relationship · Every need</p>
+            <h2 class="display" id="svc-h" data-split>Everything private aviation offers, <em>through a single advisor.</em></h2>
+          </header>
+          <div class="list-grid list-grid--3" data-reveal-group>
+            <article class="list-item">
+              <p class="list-item__label">01 · On-demand charter</p>
+              <h3 class="list-item__title">Any aircraft, any route, on your schedule</h3>
+              <p class="list-item__body">One-way, return and multi-leg journeys, compared across the network and confirmed with an all-inclusive quote.</p>
+            </article>
+            <article class="list-item">
+              <p class="list-item__label">02 · Empty legs</p>
+              <h3 class="list-item__title">Repositioning flights at preferential rates</h3>
+              <p class="list-item__body">Network scale means more empty legs, on more routes, released to our clients first.</p>
+            </article>
+            <article class="list-item">
+              <p class="list-item__label">03 · Aircraft acquisition</p>
+              <h3 class="list-item__title">The right aircraft, found anywhere in the world</h3>
+              <p class="list-item__body">Mission profiling, global search, valuation, pre-purchase inspection and closing, handled end to end.</p>
+            </article>
+            <article class="list-item">
+              <p class="list-item__label">04 · Aircraft sales</p>
+              <h3 class="list-item__title">Discreet sales to qualified buyers</h3>
+              <p class="list-item__body">Your aircraft presented privately to buyers and operators across the ecosystem, never advertised without consent.</p>
+            </article>
+            <article class="list-item">
+              <p class="list-item__label">05 · Group &amp; event charter</p>
+              <h3 class="list-item__title">Weddings, delegations and tours</h3>
+              <p class="list-item__body">VIP airliners and multi-aircraft movements, coordinated as one seamless operation.</p>
+            </article>
+            <article class="list-item">
+              <p class="list-item__label">06 · Medical &amp; urgent</p>
+              <h3 class="list-item__title">When every hour matters</h3>
+              <p class="list-item__body">Air-ambulance and repatriation flights arranged through specialist operators, around the clock.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           7. Fleet
+           ================================================================= -->
+      <section class="section section--alt" id="fleet" aria-labelledby="fleet-h">
+        <div class="container">
+          <header class="section__head">
+            <p class="eyebrow" data-reveal>10,000+ aircraft · Every category</p>
+            <h2 class="display" id="fleet-h" data-split>Matched to the mission, <em>not to our inventory.</em></h2>
+            <p data-reveal><a class="link-arrow" href="#quote">Help me choose →</a></p>
+          </header>
+          <div class="fleet-grid" data-reveal-group>
+            <article class="fleet-card" data-fleet="turboprop">
+              <div class="fleet-card__media" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/turboprop-480.avif 480w, /assets/fleet/turboprop-720.avif 720w, /assets/fleet/turboprop-960.avif 960w" />
+                  <source type="image/webp" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/turboprop-480.webp 480w, /assets/fleet/turboprop-720.webp 720w, /assets/fleet/turboprop-960.webp 960w" />
+                  <img src="/assets/fleet/turboprop-720.jpg" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/turboprop-480.jpg 480w, /assets/fleet/turboprop-720.jpg 720w, /assets/fleet/turboprop-960.jpg 960w" width="896" height="1195" alt="" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="fleet-card__body">
+                <p class="list-item__label">Up to 8 guests</p>
+                <h3 class="list-item__title">Turboprop</h3>
+                <p class="list-item__body">King Air 350 · Pilatus PC-12 · short runways and regional hops</p>
+              </div>
+            </article>
+            <article class="fleet-card" data-fleet="very-light-jet">
+              <div class="fleet-card__media" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/very-light-jet-480.avif 480w, /assets/fleet/very-light-jet-720.avif 720w, /assets/fleet/very-light-jet-960.avif 960w" />
+                  <source type="image/webp" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/very-light-jet-480.webp 480w, /assets/fleet/very-light-jet-720.webp 720w, /assets/fleet/very-light-jet-960.webp 960w" />
+                  <img src="/assets/fleet/very-light-jet-720.jpg" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/very-light-jet-480.jpg 480w, /assets/fleet/very-light-jet-720.jpg 720w, /assets/fleet/very-light-jet-960.jpg 960w" width="896" height="1195" alt="" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="fleet-card__body">
+                <p class="list-item__label">Up to 5 guests</p>
+                <h3 class="list-item__title">Very Light Jet</h3>
+                <p class="list-item__body">HondaJet · Phenom 100 · Citation M2 · quick city-to-city hops</p>
+              </div>
+            </article>
+            <article class="fleet-card" data-fleet="light-jet">
+              <div class="fleet-card__media" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/light-jet-480.avif 480w, /assets/fleet/light-jet-720.avif 720w, /assets/fleet/light-jet-960.avif 960w" />
+                  <source type="image/webp" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/light-jet-480.webp 480w, /assets/fleet/light-jet-720.webp 720w, /assets/fleet/light-jet-960.webp 960w" />
+                  <img src="/assets/fleet/light-jet-720.jpg" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/light-jet-480.jpg 480w, /assets/fleet/light-jet-720.jpg 720w, /assets/fleet/light-jet-960.jpg 960w" width="896" height="1195" alt="" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="fleet-card__body">
+                <p class="list-item__label">Up to 7 guests</p>
+                <h3 class="list-item__title">Light Jet</h3>
+                <p class="list-item__body">Phenom 300 · Citation CJ3 · short regional hops</p>
+              </div>
+            </article>
+            <article class="fleet-card" data-fleet="midsize-jet">
+              <div class="fleet-card__media" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/midsize-jet-480.avif 480w, /assets/fleet/midsize-jet-720.avif 720w, /assets/fleet/midsize-jet-960.avif 960w" />
+                  <source type="image/webp" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/midsize-jet-480.webp 480w, /assets/fleet/midsize-jet-720.webp 720w, /assets/fleet/midsize-jet-960.webp 960w" />
+                  <img src="/assets/fleet/midsize-jet-720.jpg" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/midsize-jet-480.jpg 480w, /assets/fleet/midsize-jet-720.jpg 720w, /assets/fleet/midsize-jet-960.jpg 960w" width="896" height="1195" alt="" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="fleet-card__body">
+                <p class="list-item__label">Up to 9 guests</p>
+                <h3 class="list-item__title">Midsize Jet</h3>
+                <p class="list-item__body">Hawker 900XP · Citation XLS+ · domestic and regional</p>
+              </div>
+            </article>
+            <article class="fleet-card" data-fleet="super-midsize-jet">
+              <div class="fleet-card__media" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/super-midsize-jet-480.avif 480w, /assets/fleet/super-midsize-jet-720.avif 720w, /assets/fleet/super-midsize-jet-960.avif 960w" />
+                  <source type="image/webp" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/super-midsize-jet-480.webp 480w, /assets/fleet/super-midsize-jet-720.webp 720w, /assets/fleet/super-midsize-jet-960.webp 960w" />
+                  <img src="/assets/fleet/super-midsize-jet-720.jpg" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/super-midsize-jet-480.jpg 480w, /assets/fleet/super-midsize-jet-720.jpg 720w, /assets/fleet/super-midsize-jet-960.jpg 960w" width="896" height="1195" alt="" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="fleet-card__body">
+                <p class="list-item__label">Up to 10 guests</p>
+                <h3 class="list-item__title">Super-Midsize Jet</h3>
+                <p class="list-item__body">Challenger 350 · Citation Longitude · transcontinental</p>
+              </div>
+            </article>
+            <article class="fleet-card" data-fleet="heavy-jet">
+              <div class="fleet-card__media" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/heavy-jet-480.avif 480w, /assets/fleet/heavy-jet-720.avif 720w, /assets/fleet/heavy-jet-960.avif 960w" />
+                  <source type="image/webp" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/heavy-jet-480.webp 480w, /assets/fleet/heavy-jet-720.webp 720w, /assets/fleet/heavy-jet-960.webp 960w" />
+                  <img src="/assets/fleet/heavy-jet-720.jpg" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/heavy-jet-480.jpg 480w, /assets/fleet/heavy-jet-720.jpg 720w, /assets/fleet/heavy-jet-960.jpg 960w" width="896" height="1195" alt="" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="fleet-card__body">
+                <p class="list-item__label">Up to 14 guests</p>
+                <h3 class="list-item__title">Heavy Jet</h3>
+                <p class="list-item__body">Falcon 7X · Challenger 650 · intercontinental comfort</p>
+              </div>
+            </article>
+            <article class="fleet-card" data-fleet="ultra-long-range">
+              <div class="fleet-card__media" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/ultra-long-range-480.avif 480w, /assets/fleet/ultra-long-range-720.avif 720w, /assets/fleet/ultra-long-range-960.avif 960w" />
+                  <source type="image/webp" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/ultra-long-range-480.webp 480w, /assets/fleet/ultra-long-range-720.webp 720w, /assets/fleet/ultra-long-range-960.webp 960w" />
+                  <img src="/assets/fleet/ultra-long-range-720.jpg" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/ultra-long-range-480.jpg 480w, /assets/fleet/ultra-long-range-720.jpg 720w, /assets/fleet/ultra-long-range-960.jpg 960w" width="896" height="1195" alt="" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="fleet-card__body">
+                <p class="list-item__label">Up to 19 guests</p>
+                <h3 class="list-item__title">Ultra-Long-Range</h3>
+                <p class="list-item__body">Gulfstream G650ER · Global 7500 · Mumbai–New York class</p>
+              </div>
+            </article>
+            <article class="fleet-card" data-fleet="vip-airliner">
+              <div class="fleet-card__media" aria-hidden="true">
+                <picture>
+                  <source type="image/avif" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/vip-airliner-480.avif 480w, /assets/fleet/vip-airliner-720.avif 720w, /assets/fleet/vip-airliner-960.avif 960w" />
+                  <source type="image/webp" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/vip-airliner-480.webp 480w, /assets/fleet/vip-airliner-720.webp 720w, /assets/fleet/vip-airliner-960.webp 960w" />
+                  <img src="/assets/fleet/vip-airliner-720.jpg" sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 440px" srcset="/assets/fleet/vip-airliner-480.jpg 480w, /assets/fleet/vip-airliner-720.jpg 720w, /assets/fleet/vip-airliner-960.jpg 960w" width="896" height="1195" alt="" loading="lazy" decoding="async" />
+                </picture>
+              </div>
+              <div class="fleet-card__body">
+                <p class="list-item__label">Groups &amp; delegations</p>
+                <h3 class="list-item__title">VIP Airliner</h3>
+                <p class="list-item__body">Boeing BBJ · Airbus ACJ · state and corporate travel</p>
+              </div>
+            </article>
+          </div>
+          <p class="footnote" data-reveal>Capacities are indicative and vary by configuration, payload and route.</p>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           8. Empty legs
+           ================================================================= -->
+      <section class="section" id="emptylegs" aria-labelledby="el-h">
+        <div class="container">
+          <header class="section__head">
+            <p class="eyebrow" data-reveal>Live across the network</p>
+            <h2 class="display" id="el-h" data-split>Empty legs, <em>released to you first.</em></h2>
+            <p data-reveal><a class="link-arrow" href="#contact" data-whatsapp>Get alerts on WhatsApp →</a></p>
+          </header>
+
+          <div class="legs" data-reveal>
+            <table class="legs__table">
+              <thead>
+                <tr>
+                  <th scope="col">Route</th>
+                  <th scope="col">Aircraft</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Seats</th>
+                  <th scope="col">From</th>
+                  <th scope="col"><span class="visually-hidden">Action</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" class="legs__route">Dubai <span aria-hidden="true">→</span><span class="visually-hidden">to</span> Mumbai</th>
+                  <td data-label="Aircraft">Super-Midsize</td><td data-label="Date">[Date]</td><td data-label="Seats">[Seats]</td><td data-label="From">[Price]</td>
+                  <td><a class="button button--small" href="#contact">Request hold</a></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="legs__route">London <span aria-hidden="true">→</span><span class="visually-hidden">to</span> Nice</th>
+                  <td data-label="Aircraft">Light Jet</td><td data-label="Date">[Date]</td><td data-label="Seats">[Seats]</td><td data-label="From">[Price]</td>
+                  <td><a class="button button--small" href="#contact">Request hold</a></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="legs__route">Singapore <span aria-hidden="true">→</span><span class="visually-hidden">to</span> Delhi</th>
+                  <td data-label="Aircraft">Heavy Jet</td><td data-label="Date">[Date]</td><td data-label="Seats">12</td><td data-label="From">[Price]</td>
+                  <td><a class="button button--small" href="#contact">Request hold</a></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="legs__route">New York <span aria-hidden="true">→</span><span class="visually-hidden">to</span> Miami</th>
+                  <td data-label="Aircraft">Midsize</td><td data-label="Date">[Date]</td><td data-label="Seats">[Seats]</td><td data-label="From">[Price]</td>
+                  <td><a class="button button--small" href="#contact">Request hold</a></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="legs__route">Geneva <span aria-hidden="true">→</span><span class="visually-hidden">to</span> Riyadh</th>
+                  <td data-label="Aircraft">Ultra-Long-Range</td><td data-label="Date">[Date]</td><td data-label="Seats">14</td><td data-label="From">[Price]</td>
+                  <td><a class="button button--small" href="#contact">Request hold</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           9. Guarantee of care
+           ================================================================= -->
+      <section class="section section--alt" id="care" aria-labelledby="dep-h">
+        <div class="container">
+          <header class="section__head">
+            <p class="eyebrow" data-reveal>The Flying Advisors guarantee of care</p>
+            <h2 class="display" id="dep-h" data-split>Six commitments behind <em>every flight we arrange.</em></h2>
+            <p class="lede" data-reveal>Trust is earned in the details nobody sees. These are the ones we hold ourselves to, on every booking and every transaction.</p>
+          </header>
+          <div class="list-grid list-grid--3" data-reveal-group>
+            <article class="list-item">
+              <h3 class="list-item__title">Operator safety vetting</h3>
+              <p class="list-item__body">Certification, insurance, crew and safety history reviewed before any operator flies a client.</p>
+            </article>
+            <article class="list-item">
+              <h3 class="list-item__title">All-inclusive quotes</h3>
+              <p class="list-item__body">Fees, taxes, crew and handling shown upfront. The price you approve is the price you pay.</p>
+            </article>
+            <article class="list-item">
+              <h3 class="list-item__title">Back-up aircraft, always</h3>
+              <p class="list-item__body">If an aircraft goes technical, the network lets us source a replacement quickly so your plans hold.</p>
+            </article>
+            <article class="list-item">
+              <h3 class="list-item__title">24/7 flight following</h3>
+              <p class="list-item__body">Your advisor and our global desk watch each flight from door to door, at any hour.</p>
+            </article>
+            <article class="list-item">
+              <h3 class="list-item__title">Protected transactions</h3>
+              <p class="list-item__body">Aircraft deposits and sale proceeds held through a recognised escrow agent until closing.</p>
+            </article>
+            <article class="list-item">
+              <h3 class="list-item__title">Confidential by default</h3>
+              <p class="list-item__body">Names, itineraries and transactions protected; NDAs signed on request.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           10. Sales & acquisition
+           ================================================================= -->
+      <section class="section" id="sales" aria-labelledby="sales-h">
+        <div class="container">
+          <header class="section__head">
+            <p class="eyebrow" data-reveal>Aircraft sales &amp; acquisition</p>
+            <h2 class="display" id="sales-h" data-split>The world’s market, <em>quietly at your side.</em></h2>
+            <p class="lede" data-reveal>Because 500+ operators and their owners already sit inside our network, we often know which aircraft will come to market before it is listed, and which buyers are ready to act.</p>
+          </header>
+
+          <ol class="steps" data-reveal-group>
+            <li><span class="steps__num">01</span>Mission &amp; budget profile</li>
+            <li><span class="steps__num">02</span>On- and off-market search</li>
+            <li><span class="steps__num">03</span>Valuation &amp; negotiation</li>
+            <li><span class="steps__num">04</span>Inspection, escrow, delivery</li>
+          </ol>
+
+          <div class="listings" data-reveal-group>
+            <article class="listing">
+              <div class="listing__photo"><span>[Aircraft photograph]</span><span class="listing__tag">Exclusive mandate</span></div>
+              <p class="list-item__label">Super-midsize jet</p>
+              <h3 class="list-item__title">[Year] [Aircraft model]</h3>
+              <p class="listing__meta">[Hours] hrs · [Seats] seats · [Location]</p>
+              <p class="listing__price">Price on request</p>
+              <a class="link-arrow" href="#contact">Request dossier →</a>
+            </article>
+            <article class="listing">
+              <div class="listing__photo"><span>[Aircraft photograph]</span><span class="listing__tag">Off-market</span></div>
+              <p class="list-item__label">Ultra-long-range jet</p>
+              <h3 class="list-item__title">[Year] [Aircraft model]</h3>
+              <p class="listing__meta">[Hours] hrs · [Seats] seats · [Location]</p>
+              <p class="listing__price">Price on request</p>
+              <a class="link-arrow" href="#contact">Request dossier →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           11. Beyond the first flight
+           ================================================================= -->
+      <section class="section section--alt" id="beyond" aria-labelledby="harm-h">
+        <div class="container">
+          <header class="section__head">
+            <p class="eyebrow" data-reveal>Beyond the first flight</p>
+            <h2 class="display" id="harm-h" data-split>An ecosystem grows stronger <em>with everyone in it.</em></h2>
+          </header>
+          <div class="list-grid list-grid--3" data-reveal-group>
+            <article class="list-item list-item--offer">
+              <p class="list-item__label">Private client circle</p>
+              <h3 class="list-item__title list-item__title--lg">For those who fly often</h3>
+              <p class="list-item__body">One dedicated advisor who knows your preferences, first access to empty legs, priority sourcing at peak dates and a yearly review of whether charter, jet card or ownership serves you best.</p>
+              <a class="link-arrow" href="#contact">Request an invitation →</a>
+            </article>
+            <article class="list-item list-item--offer" id="partner">
+              <p class="list-item__label">Operator partnership</p>
+              <h3 class="list-item__title list-item__title--lg">For operators and owners</h3>
+              <p class="list-item__body">Fill empty sectors, reach clients on other continents and grow utilisation, alongside 500+ operators who already trust the network.</p>
+              <a class="link-arrow" href="#contact">Apply to join the network →</a>
+            </article>
+            <article class="list-item list-item--offer">
+              <p class="list-item__label">Corporate &amp; family office</p>
+              <h3 class="list-item__title list-item__title--lg">For organisations that move people</h3>
+              <p class="list-item__body">Travel policies, consolidated billing and a single desk for executives, boards and families across every time zone.</p>
+              <a class="link-arrow" href="#contact">Arrange a briefing →</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           12. FAQ
+           ================================================================= -->
+      <section class="section" id="faq" aria-labelledby="faq-h">
+        <div class="container container--narrow">
+          <header class="section__head">
+            <p class="eyebrow" data-reveal>Before you fly</p>
+            <h2 class="display" id="faq-h" data-split>Questions clients <em>ask us first.</em></h2>
+          </header>
+          <div class="faq" data-faq data-reveal>
+            <div class="faq__item">
+              <h3 class="faq__q"><button type="button" aria-expanded="true" aria-controls="faq-a1" id="faq-q1">Do you own the aircraft we fly on?<span class="faq__sign" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="faq-a1" role="region" aria-labelledby="faq-q1"><p>No, and that is deliberate. As an independent broker we are free to choose the best aircraft from more than 500 operators for each journey, rather than the one we need to fill.</p></div>
+            </div>
+            <div class="faq__item">
+              <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">How do you make sure an operator is safe?<span class="faq__sign" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden><p>Every operator is reviewed for certification, insurance, crew qualifications and safety history before joining the network, and reviewed again over time.</p></div>
+            </div>
+            <div class="faq__item">
+              <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">How quickly can you arrange a flight?<span class="faq__sign" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden><p>Options usually arrive within the hour, and many flights can be confirmed for the same or next day, subject to aircraft position, permits and airport slots.</p></div>
+            </div>
+            <div class="faq__item">
+              <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">Is the quote all-inclusive?<span class="faq__sign" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden><p>Yes. Quotes show the aircraft, crew, fuel, fees, taxes and handling, with anything optional such as special catering listed separately.</p></div>
+            </div>
+            <div class="faq__item">
+              <h3 class="faq__q"><button type="button" aria-expanded="false" aria-controls="faq-a5" id="faq-q5">Can you fly us internationally, from any country?<span class="faq__sign" aria-hidden="true"></span></button></h3>
+              <div class="faq__a" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden><p>Yes. The network spans every major region, and we handle overflight and landing permits, customs coordination and ground arrangements at both ends.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           13. Contact
+           ================================================================= -->
+      <section class="section section--alt contact" id="contact" aria-labelledby="contact-h">
+        <div class="container container--narrow">
+          <header class="section__head">
+            <p class="eyebrow" data-reveal>Your advisor is ready</p>
+            <h2 class="display display--lg" id="contact-h" data-split>One conversation. <em>The whole sky.</em></h2>
+            <p class="lede" data-reveal>Share what you have in mind. A named advisor will come back with considered options, not a sales pitch.</p>
+          </header>
+
+          <dl class="contact__details" data-reveal-group>
+            <div><dt>Global desk · 24/7</dt><dd><a href="tel:+0000000000" data-phone>+[Global number]</a></dd></div>
+            <div><dt>Email</dt><dd><a href="mailto:concierge@flyingadvisors.com">concierge@flyingadvisors.com</a></dd></div>
+            <div><dt>Advisory desks</dt><dd>[City] · [City] · [City] · [City]</dd></div>
+          </dl>
+
+          <div class="contact__form-wrap" data-reveal>
+            <form class="contact-form" data-contact-form novalidate aria-labelledby="contact-h">
+              <div class="field-grid field-grid--2">
+                <div class="field" data-field>
+                  <label class="field__label" for="c-name">Full name</label>
+                  <input class="field__input" id="c-name" name="name" type="text" autocomplete="name" required aria-describedby="c-name-error" />
+                  <span class="field__focus" aria-hidden="true"></span>
+                  <p class="field__error" id="c-name-error" data-field-error></p>
+                </div>
+                <div class="field" data-field>
+                  <label class="field__label" for="c-email">Email</label>
+                  <input class="field__input" id="c-email" name="email" type="email" autocomplete="email" required aria-describedby="c-email-error" />
+                  <span class="field__focus" aria-hidden="true"></span>
+                  <p class="field__error" id="c-email-error" data-field-error></p>
+                </div>
+              </div>
+              <div class="field" data-field>
+                <label class="field__label" for="c-mobile">Mobile</label>
+                <input class="field__input" id="c-mobile" name="mobile" type="tel" autocomplete="tel" pattern="[0-9+\(\)\-\s]{6,}" aria-describedby="c-mobile-error" />
+                <span class="field__focus" aria-hidden="true"></span>
+                <p class="field__error" id="c-mobile-error" data-field-error></p>
+              </div>
+              <div class="field" data-field>
+                <label class="field__label" for="c-message">How may we help?</label>
+                <textarea class="field__input" id="c-message" name="message" rows="3" required aria-describedby="c-message-error"></textarea>
+                <span class="field__focus" aria-hidden="true"></span>
+                <p class="field__error" id="c-message-error" data-field-error></p>
+              </div>
+              <div class="contact-form__actions">
+                <button class="button button--primary" type="submit" data-submit>Send in confidence</button>
+                <a class="button button--quiet" href="#contact" data-whatsapp>WhatsApp us</a>
+              </div>
+              <p class="form-note">Prefer a call back? Leave your number and a convenient time.</p>
+              <p class="form-status" role="status" aria-live="polite" data-status></p>
+            </form>
+            <p class="form-success" data-success tabindex="-1" hidden>Thank you. A named advisor will come back to you shortly.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===================================================================
+         Footer
+         =================================================================== -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="site-footer__brand">
+          <img class="site-footer__mark" src="/assets/brand/logo-mark@2x.png" width="88" height="88" alt="" loading="lazy" />
+          <p class="brand__name">Flying Advisors</p>
+          <p class="site-footer__blurb">The global private aviation ecosystem. 10,000+ aircraft. 500+ operators. One standard of care.</p>
+        </div>
+
+        <nav class="site-footer__nav" aria-label="Footer">
+          <div>
+            <p class="eyebrow">Fly</p>
+            <ul>
+              <li><a href="#charter">Charter</a></li>
+              <li><a href="#emptylegs">Empty legs</a></li>
+              <li><a href="#charter">Group charter</a></li>
+              <li><a href="#charter">Medical flights</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="eyebrow">Own</p>
+            <ul>
+              <li><a href="#sales">Acquisition</a></li>
+              <li><a href="#sales">Sell your aircraft</a></li>
+              <li><a href="#sales">Valuation</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="eyebrow">Partner</p>
+            <ul>
+              <li><a href="#operators">Operators</a></li>
+              <li><a href="#beyond">Corporate</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+        </nav>
+
+        <p class="site-footer__legal">Flying Advisors acts as broker and agent for its clients and does not itself operate aircraft. Every flight is performed by an operator holding the required air operator certification in its country of registry (in India, DGCA Non-Scheduled Operator permits), which retains full operational control. Aircraft listings are subject to prior sale and verification. Network figures refer to aircraft and operators accessible through partner agreements.</p>
+
+        <div class="site-footer__base">
+          <p>© 2026 Flying Advisors · flyingadvisors.com</p>
+          <p><a href="#top">Privacy</a> · <a href="#top">Terms</a> · <a href="#top">Cookie preferences</a></p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
