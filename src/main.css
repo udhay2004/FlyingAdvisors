@@ -1114,52 +1114,6 @@ textarea.field__input {
   margin: clamp(48px, 6vw, 80px) auto 0;
 }
 
-.network-map svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.network-map__grid {
-  fill: none;
-  stroke: var(--color-gold);
-  stroke-width: 0.35;
-  opacity: 0.28;
-}
-
-.network-map__routes {
-  fill: none;
-  stroke: var(--color-gold);
-  stroke-width: 0.9;
-  opacity: 0.85;
-}
-
-.network-map__long {
-  fill: none;
-  stroke: var(--color-gold);
-  stroke-width: 0.6;
-  stroke-dasharray: 2 4;
-  opacity: 0.7;
-}
-
-.network-map__hubs {
-  fill: var(--color-gold);
-}
-
-.network-map__rings {
-  fill: none;
-  stroke: var(--color-gold);
-  stroke-width: 0.6;
-  opacity: 0.6;
-}
-
-.network-map__labels {
-  fill: var(--color-paper-muted);
-  font-family: var(--font-body);
-  font-size: 8.5px;
-  letter-spacing: 1.6px;
-}
-
 .network-map__caption {
   margin-top: 14px;
   font-size: 0.625rem;
@@ -1750,10 +1704,6 @@ textarea.field__input {
     gap: 22px;
   }
 
-  /* City labels become unreadable at phone width; the regions list carries them. */
-  .network-map__labels {
-    display: none;
-  }
 
   .site-footer__nav {
     grid-template-columns: minmax(0, 1fr);
@@ -2244,4 +2194,16 @@ textarea.field__input {
 .stats__value {
   font-variant-numeric: lining-nums;
   font-feature-settings: 'lnum' 1;
+}
+
+/* Network map: illustrated world map image */
+.network-map {
+  max-width: 1200px;
+}
+
+.network-map__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-gold-line);
 }

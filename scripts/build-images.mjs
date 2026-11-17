@@ -6,6 +6,8 @@
 //   public/assets/photos/hero.jpg       opening hero
 //   public/assets/photos/arrive.jpg     "Tell us where you are"
 //   public/assets/photos/operators.jpg  operator section
+//   public/assets/photos/network-map.webp  world map in the network section
+//   (.jpg, .png or .webp all work)
 //
 // Fleet card images: public/assets/fleet/<name>.png|jpg (see FLEET below).
 //
@@ -25,7 +27,7 @@ import sharp from 'sharp';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIR = join(ROOT, 'public', 'assets', 'photos');
-const PHOTOS = ['hero', 'arrive', 'operators'];
+const PHOTOS = ['hero', 'arrive', 'operators', 'network-map'];
 const BLURRED = [];
 const WIDTHS = [1280, 1920, 2560, 3840];
 
@@ -56,7 +58,7 @@ function encode(pipeline, format) {
 }
 
 async function build(name) {
-  const file = join(DIR, `${name}.jpg`);
+  const file = ['jpg', 'png', 'webp'].map((ext) => join(DIR, `${name}.${ext}`)).find(existsSync) ?? join(DIR, `${name}.jpg`);
   const isPlaceholder = !existsSync(file);
   const input = isPlaceholder ? await placeholder() : file;
   const meta = await sharp(input).metadata();
