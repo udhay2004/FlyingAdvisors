@@ -4,6 +4,7 @@ import '@fontsource/cormorant-garamond/latin-300-italic.css';
 import '@fontsource/cormorant-garamond/latin-400.css';
 import '@fontsource/hanken-grotesk/latin-400.css';
 import '@fontsource/hanken-grotesk/latin-500.css';
+import '@fontsource/pinyon-script/latin-400.css';
 import 'lenis/dist/lenis.css';
 import './main.css';
 
@@ -12,7 +13,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import Lenis from 'lenis';
 
-import { LENIS_LERP, PHONE_LABEL, PHONE_NUMBER, SLOW_SCROLL } from './config';
+import { LENIS_LERP, SLOW_SCROLL } from './config';
 import { initContactForm, initFaq, initQuoteForm } from './forms';
 
 declare global {
@@ -357,22 +358,6 @@ document.addEventListener('keydown', (event) => {
   }
 });
 window.matchMedia('(min-width: 901px)').addEventListener('change', (e) => e.matches && closeMenu());
-
-// ---------------------------------------------------------------------------
-// Contact details from config
-// ---------------------------------------------------------------------------
-
-if (PHONE_NUMBER) {
-  document.querySelectorAll<HTMLAnchorElement>('[data-phone]').forEach((a) => {
-    a.href = `tel:+${PHONE_NUMBER}`;
-    a.textContent = PHONE_LABEL;
-  });
-  document.querySelectorAll<HTMLAnchorElement>('[data-whatsapp]').forEach((a) => {
-    a.href = `https://wa.me/${PHONE_NUMBER}`;
-    a.target = '_blank';
-    a.rel = 'noopener';
-  });
-}
 
 // ---------------------------------------------------------------------------
 // Refresh

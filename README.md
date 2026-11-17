@@ -80,16 +80,12 @@ Each photo's crop point is set with `--focus` in `main.css`
 
 ## Placeholders still in the copy
 
-`+[Global number]`, `[XX]` countries, `[City]` desks, empty-leg `[Date]`,
-`[Seats]`, `[Price]`, the two aircraft listings, and the four membership
-logos. Search `index.html` for `[` to find them all.
+Empty-leg `[Date]`, `[Seats]` and `[Price]`. Search `index.html` for `[` to find them all.
 
 ## Config (`src/config.ts`)
 
 - `QUOTE_ENDPOINT`, `CONTACT_ENDPOINT`, `SIMULATE_SUBMIT`: set the real
   endpoints and turn simulation off. Forms POST JSON and expect a 2xx.
-- `PHONE_NUMBER`: digits with country code. Fills every phone link and turns
-  every WhatsApp link into a `wa.me` link.
 - `LENIS_LERP`: scroll glide. `SLOW_SCROLL`: how far each photo lags behind
   the page (0.4 = moves at 60% of page speed).
 

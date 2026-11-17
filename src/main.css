@@ -2178,3 +2178,70 @@ textarea.field__input {
     --fleet-cols: 1;
   }
 }
+
+/* ==========================================================================
+   Hero headline: signature script
+   ========================================================================== */
+
+:root {
+  --font-signature: 'Pinyon Script', 'Snell Roundhand', 'Apple Chancery', cursive;
+  --step-signature: clamp(2.5rem, 4.4vw, 4.75rem);
+}
+
+.hero__headline {
+  font-family: var(--font-signature);
+  font-size: var(--step-signature);
+  font-weight: 400;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+/* Script capitals and descenders reach well beyond the line box. */
+.hero__headline .split-mask {
+  padding: 0.12em 0.2em 0.22em 0;
+  margin: -0.12em -0.2em -0.22em 0;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --step-signature: clamp(2.125rem, 9.4vw, 2.875rem);
+  }
+}
+
+/* Contact: numbers with a small note, and the office address */
+.contact__details dd + dd {
+  margin-top: 8px;
+}
+
+.contact__note {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-body);
+  font-size: var(--step-label);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-paper-dim);
+}
+
+.contact__address,
+.site-footer__address {
+  font-style: normal;
+}
+
+.site-footer__address {
+  max-width: 60ch;
+  font-size: var(--step-small);
+  line-height: 1.8;
+  color: var(--color-paper-muted);
+}
+
+.site-footer__address a:hover {
+  color: var(--color-paper);
+}
+
+/* Phone numbers and figures read better with even-height (lining) digits. */
+.contact__details dd,
+.stats__value {
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1;
+}

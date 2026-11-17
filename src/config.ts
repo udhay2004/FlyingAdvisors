@@ -19,18 +19,6 @@ export const CONTACT_ENDPOINT = '/api/contact';
 export const SIMULATE_SUBMIT = true;
 
 // ---------------------------------------------------------------------------
-// Contact details
-// ---------------------------------------------------------------------------
-
-/**
- * Digits only, with country code, e.g. '919800000000'. When set, every
- * [data-phone] link dials it and every [data-whatsapp] link opens WhatsApp.
- * Leave empty to keep the placeholders (links fall back to #contact).
- */
-export const PHONE_NUMBER = '';
-export const PHONE_LABEL = '+[Global number]';
-
-// ---------------------------------------------------------------------------
 // Motion
 // ---------------------------------------------------------------------------
 
