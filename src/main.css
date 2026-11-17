@@ -2147,9 +2147,12 @@ textarea.field__input {
 }
 
 /* Script capitals and descenders reach well beyond the line box. */
+/* Script capitals and the loops of y, g and f reach well beyond the line box,
+   to the left as well as above and below; give every side room so nothing is
+   clipped by the line mask. Negative margins keep the text where it was. */
 .hero__headline .split-mask {
-  padding: 0.12em 0.2em 0.22em 0;
-  margin: -0.12em -0.2em -0.22em 0;
+  padding: 0.16em 0.3em 0.32em 0.45em;
+  margin: -0.16em -0.3em -0.32em -0.45em;
 }
 
 @media (max-width: 640px) {
@@ -2206,4 +2209,203 @@ textarea.field__input {
   width: 100%;
   height: auto;
   border: 1px solid var(--color-gold-line);
+}
+
+/* ==========================================================================
+   Contact list: four entries, each with a label, value, note and action
+   ========================================================================== */
+
+.contact-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 1200px;
+  margin: 0 auto clamp(56px, 7vw, 88px);
+  border-top: 1px solid var(--color-gold-line);
+  border-bottom: 1px solid var(--color-gold-line);
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(28px, 3vw, 40px) clamp(16px, 2vw, 28px);
+  text-align: center;
+}
+
+.contact-item + .contact-item {
+  border-left: 1px solid var(--color-gold-line);
+}
+
+.contact-item__label {
+  font-size: var(--step-label);
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.contact-item__value {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.6vw, 1.5rem);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.35;
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1;
+  color: var(--color-paper);
+  transition: color var(--dur-quick) var(--ease-out);
+}
+
+a.contact-item__value:hover {
+  color: var(--color-gold);
+}
+
+.contact-item__value--email {
+  font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+}
+
+.contact-item__note {
+  font-size: var(--step-small);
+  color: var(--color-paper-dim);
+}
+
+.contact-item__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 20px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.contact-item__actions .link-arrow::after {
+  content: ' →';
+}
+
+/* Footer: one fact per line */
+.site-footer__address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-variant-numeric: lining-nums;
+}
+
+@media (max-width: 1024px) {
+  .contact-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact-item + .contact-item {
+    border-left: 0;
+  }
+
+  .contact-item:nth-child(even) {
+    border-left: 1px solid var(--color-gold-line);
+  }
+
+  .contact-item:nth-child(n + 3) {
+    border-top: 1px solid var(--color-gold-line);
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .contact-item:nth-child(even) {
+    border-left: 0;
+  }
+
+  .contact-item + .contact-item {
+    border-top: 1px solid var(--color-gold-line);
+  }
+
+  .contact-item {
+    padding: 24px 4px;
+  }
+}
+
+/* ==========================================================================
+   Small phones: keep the header on one row with the menu button in reach
+   ========================================================================== */
+
+.brand {
+  min-width: 0;
+}
+
+.menu-toggle {
+  flex: none;
+}
+
+@media (max-width: 420px) {
+  .main-nav {
+    gap: 12px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand__mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .brand__name {
+    font-size: 0.9375rem;
+    letter-spacing: 0.14em;
+  }
+
+  /* At this size the 8px tagline would be unreadable. */
+  .brand__tag {
+    display: none;
+  }
+
+  /* Icon only; the button keeps its accessible name. */
+  .menu-toggle__label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .menu-toggle {
+    justify-content: center;
+    min-width: 44px;
+  }
+}
+
+/* Brand tagline: never below 10px where it is shown (hidden under 420px). */
+.brand__tag {
+  font-size: 0.625rem;
+  letter-spacing: 0.26em;
+}
+
+@media (max-width: 640px) {
+  .brand__tag {
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+  }
+}
+
+.contact-item__address {
+  font-size: clamp(1.0625rem, 1.3vw, 1.25rem);
+  white-space: nowrap;
+}
+
+/* Comfortable 44px tap targets for the phone links in the menu and footer. */
+.mobile-menu__desk a,
+.site-footer__address a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.site-footer__address {
+  gap: 0;
 }

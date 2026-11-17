@@ -37,6 +37,47 @@
       imagesizes="(max-aspect-ratio: 3/2) 150vh, 100vw"
     />
 
+    <!-- Business details for search engines (address, phones, email). -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        "name": "Flying Advisors",
+        "description": "Global private aviation ecosystem: charter, empty legs, aircraft acquisition and sales, through a network of 500+ operators and 10,000+ aircraft.",
+        "url": "https://flyingadvisors.com",
+        "email": "concierge@flyingadvisors.com",
+        "telephone": "+91-93543-73625",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "A-143, Sector 63",
+          "addressLocality": "Noida",
+          "addressRegion": "Uttar Pradesh",
+          "postalCode": "201301",
+          "addressCountry": "IN"
+        },
+        "contactPoint": [
+          {
+            "@type": "ContactPoint",
+            "telephone": "+91-93543-73625",
+            "contactType": "reservations",
+            "description": "Calls and WhatsApp"
+          },
+          {
+            "@type": "ContactPoint",
+            "telephone": "+1-863-512-1034",
+            "contactType": "customer service",
+            "description": "Global desk, WhatsApp only",
+            "hoursAvailable": {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+              "opens": "00:00",
+              "closes": "23:59"
+            }
+          }
+        ]
+      }
+    </script>
+
     <script type="module" src="/src/main.ts"></script>
   </head>
 
@@ -80,8 +121,8 @@
         </ul>
         <div class="mobile-menu__desk">
           <p>Global operations desk · Open 24 hours · 365 days</p>
+          <a href="tel:+919354373625">+91 93543 73625 · Calls &amp; WhatsApp</a>
           <a href="https://wa.me/18635121034" target="_blank" rel="noopener">+1 863 512 1034 · WhatsApp only</a>
-          <a href="tel:+919354373625">+91 93543 73625 · Calls and WhatsApp</a>
         </div>
       </div>
     </header>
@@ -752,15 +793,51 @@
             <p class="lede" data-reveal>Share what you have in mind. A named advisor will come back with considered options, not a sales pitch.</p>
           </header>
 
-          <dl class="contact__details" data-reveal-group>
-            <div>
-              <dt>Global desk · 24/7</dt>
-              <dd><a href="https://wa.me/18635121034" target="_blank" rel="noopener">+1 863 512 1034</a><span class="contact__note">WhatsApp only</span></dd>
-              <dd><a href="tel:+919354373625">+91 93543 73625</a><span class="contact__note">Calls and WhatsApp</span></dd>
-            </div>
-            <div><dt>Email</dt><dd><a href="mailto:concierge@flyingadvisors.com">concierge@flyingadvisors.com</a></dd></div>
-            <div><dt>Office</dt><dd><address class="contact__address">A-143, Noida Sector 63<br />Uttar Pradesh 201301</address></dd></div>
-          </dl>
+        </div>
+
+        <!-- Contact details: full width so the email and address never squeeze. -->
+        <div class="container">
+          <ul class="contact-list" data-reveal-group>
+            <li class="contact-item">
+              <p class="contact-item__label">Calls &amp; WhatsApp</p>
+              <a class="contact-item__value" href="tel:+919354373625">+91 93543 73625</a>
+              <p class="contact-item__note">India</p>
+              <p class="contact-item__actions">
+                <a class="link-arrow" href="tel:+919354373625">Call</a>
+                <a class="link-arrow" href="https://wa.me/919354373625" target="_blank" rel="noopener">WhatsApp</a>
+              </p>
+            </li>
+            <li class="contact-item">
+              <p class="contact-item__label">Global desk · 24/7</p>
+              <a class="contact-item__value" href="https://wa.me/18635121034" target="_blank" rel="noopener">+1 863 512 1034</a>
+              <p class="contact-item__note">WhatsApp only</p>
+              <p class="contact-item__actions">
+                <a class="link-arrow" href="https://wa.me/18635121034" target="_blank" rel="noopener">Message us</a>
+              </p>
+            </li>
+            <li class="contact-item">
+              <p class="contact-item__label">Email</p>
+              <a class="contact-item__value contact-item__value--email" href="mailto:concierge@flyingadvisors.com">concierge@<wbr />flyingadvisors.com</a>
+              <p class="contact-item__note">For enquiries and documents</p>
+              <p class="contact-item__actions">
+                <a class="link-arrow" href="mailto:concierge@flyingadvisors.com">Send an email</a>
+              </p>
+            </li>
+            <li class="contact-item">
+              <p class="contact-item__label">Office</p>
+              <address class="contact-item__value contact-item__address">
+                A-143, Sector 63<br />
+                Noida, Uttar Pradesh<br />
+                201301, India
+              </address>
+              <p class="contact-item__actions">
+                <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query=A-143%2C%20Sector%2063%2C%20Noida%2C%20Uttar%20Pradesh%20201301" target="_blank" rel="noopener">Get directions</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="container container--narrow">
 
           <div class="contact__form-wrap" data-reveal>
             <form class="contact-form" data-contact-form novalidate aria-labelledby="contact-h">
@@ -812,7 +889,12 @@
           <img class="site-footer__mark" src="/assets/brand/logo-mark@2x.png" width="88" height="88" alt="" loading="lazy" />
           <p class="brand__name">Flying Advisors</p>
           <p class="site-footer__blurb">The global private aviation ecosystem. 10,000+ aircraft. 500+ operators. One standard of care.</p>
-          <address class="site-footer__address">A-143, Noida Sector 63, Uttar Pradesh 201301<br /><a href="https://wa.me/18635121034" target="_blank" rel="noopener">+1 863 512 1034</a> (WhatsApp only) · <a href="tel:+919354373625">+91 93543 73625</a> (calls and WhatsApp)</address>
+          <address class="site-footer__address">
+            <span>A-143, Sector 63, Noida, Uttar Pradesh 201301, India</span>
+            <span><a href="tel:+919354373625">+91 93543 73625</a> · Calls &amp; WhatsApp</span>
+            <span><a href="https://wa.me/18635121034" target="_blank" rel="noopener">+1 863 512 1034</a> · WhatsApp only, 24/7</span>
+            <span><a href="mailto:concierge@flyingadvisors.com">concierge@flyingadvisors.com</a></span>
+          </address>
         </div>
 
         <nav class="site-footer__nav" aria-label="Footer">
