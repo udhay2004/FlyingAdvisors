@@ -168,7 +168,12 @@
 
           <!-- Right: the quote form -->
           <div class="quote-panel" id="quote" data-hero-panel>
-            <form class="quote-form" data-quote-form novalidate aria-labelledby="quote-title">
+            <form class="quote-form" action="https://api.web3forms.com/submit" method="POST" data-quote-form novalidate aria-labelledby="quote-title">
+              <!-- Web3Forms: emails each enquiry to the Flying Advisors inbox -->
+              <input type="hidden" name="access_key" value="%VITE_WEB3FORMS_ACCESS_KEY%" data-access-key />
+              <input type="hidden" name="subject" value="New enquiry: Fly (charter)" data-subject />
+              <input type="hidden" name="from_name" value="flyingadvisors.com" />
+              <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <h3 class="quote-form__title" id="quote-title">How may we serve you?</h3>
 
               <div class="tabs" role="tablist" aria-label="Enquiry type">
@@ -840,7 +845,12 @@
         <div class="container container--narrow">
 
           <div class="contact__form-wrap" data-reveal>
-            <form class="contact-form" data-contact-form novalidate aria-labelledby="contact-h">
+            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST" data-contact-form novalidate aria-labelledby="contact-h">
+              <!-- Web3Forms: emails each enquiry to the Flying Advisors inbox -->
+              <input type="hidden" name="access_key" value="%VITE_WEB3FORMS_ACCESS_KEY%" data-access-key />
+              <input type="hidden" name="subject" value="New message from the contact form" data-subject />
+              <input type="hidden" name="from_name" value="flyingadvisors.com" />
+              <input type="checkbox" name="botcheck" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
               <div class="field-grid field-grid--2">
                 <div class="field" data-field>
                   <label class="field__label" for="c-name">Full name</label>

@@ -5,18 +5,19 @@
 // ---------------------------------------------------------------------------
 
 /**
- * STUB: where each form is POSTed as JSON. Replace with your real endpoints
- * (Formspree, a serverless function, your CRM...).
+ * Both forms are emailed through Web3Forms (https://web3forms.com).
+ * The access key comes from the VITE_WEB3FORMS_ACCESS_KEY environment variable
+ * (Railway service variables, or .env.local on your machine). It is read at
+ * build time, so rebuild after changing it.
  */
-export const QUOTE_ENDPOINT = '/api/quote';
-export const CONTACT_ENDPOINT = '/api/contact';
+export const WEB3FORMS_ACCESS_KEY: string = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY ?? '';
+export const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
 
 /**
  * While true, submitting skips the network and shows the success state after a
- * short pause, so the flow can be tested before an endpoint exists.
- * Set to false once the endpoints above are real.
+ * short pause. Keep false so enquiries are actually sent.
  */
-export const SIMULATE_SUBMIT = true;
+export const SIMULATE_SUBMIT = false;
 
 // ---------------------------------------------------------------------------
 // Motion

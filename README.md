@@ -84,8 +84,17 @@ Empty-leg `[Date]`, `[Seats]` and `[Price]`. Search `index.html` for `[` to find
 
 ## Config (`src/config.ts`)
 
-- `QUOTE_ENDPOINT`, `CONTACT_ENDPOINT`, `SIMULATE_SUBMIT`: set the real
-  endpoints and turn simulation off. Forms POST JSON and expect a 2xx.
+- Forms: both forms (quote and contact) are emailed through Web3Forms. The
+  access key is **not** in the code; set it as an environment variable:
+
+  ```
+  VITE_WEB3FORMS_ACCESS_KEY=your-web3forms-key
+  ```
+
+  On Railway add it under the service's Variables, then redeploy (it is read
+  at build time). Locally, put the same line in `.env.local` (git-ignored;
+  see `.env.example`).
+- `SIMULATE_SUBMIT`: `true` fakes a successful send for testing without email.
 - `LENIS_LERP`: scroll glide. `SLOW_SCROLL`: how far each photo lags behind
   the page (0.4 = moves at 60% of page speed).
 

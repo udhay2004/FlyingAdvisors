@@ -1,5 +1,5 @@
 import { gsap } from 'gsap';
-import { CONTACT_ENDPOINT, QUOTE_ENDPOINT, SIMULATE_SUBMIT } from './config';
+import { FORM_ENDPOINT, SIMULATE_SUBMIT, WEB3FORMS_ACCESS_KEY } from './config';
 
 type Control = HTMLInputElement | HTMLTextAreaElement;
 type Messages = Record<string, Partial<Record<keyof ValidityState, string>>>;
@@ -24,11 +24,43 @@ const MESSAGES: Messages = {
   message: { valueMissing: 'A line or two is enough.' },
 };
 
+const SUBJECTS: Record<string, string> = {
+  fly: 'New enquiry: Fly (charter)',
+  buy: 'New enquiry: Buy an aircraft',
+  sell: 'New enquiry: Sell an aircraft',
+};
+
 const CTA_LABELS: Record<string, string> = {
   fly: 'Submit your query',
   buy: 'Submit your query',
   sell: 'Submit your query',
 };
+
+// Readable labels for the enquiry email (Web3Forms prints field names as-is).
+const EMAIL_LABELS: Record<string, string> = {
+  type: 'Enquiry type',
+  trip: 'Trip',
+  from: 'From',
+  to: 'To',
+  departure: 'Departure',
+  return: 'Return',
+  guests: 'Guests',
+  baggage: 'Baggage',
+  pets: 'Travelling with pets',
+  petCount: 'Number of pets',
+  mission: 'Mission',
+  budget: 'Budget',
+  timeline: 'Timeline',
+  model: 'Aircraft make & model',
+  year: 'Year',
+  basedAt: 'Based in',
+  mobile: 'Mobile / WhatsApp',
+  name: 'Name',
+  message: 'Message',
+};
+
+// Fields Web3Forms reads itself, sent under their own names.
+const WEB3FORMS_FIELDS = new Set(['access_key', 'subject', 'from_name', 'botcheck', 'email']);
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -45,6 +77,11 @@ function messageFor(control: Control): string {
 // ---------------------------------------------------------------------------
 
 function wireForm(form: HTMLFormElement, endpoint: string): void {
+  const key = form.querySelector<HTMLInputElement>('[data-access-key]');
+  if (key) key.value = WEB3FORMS_ACCESS_KEY;
+  if (!WEB3FORMS_ACCESS_KEY && !SIMULATE_SUBMIT) {
+    console.warn('VITE_WEB3FORMS_ACCESS_KEY is not set: form submissions will fail.');
+  }
   const wrap = form.parentElement!;
   const status = form.querySelector<HTMLElement>('[data-status]');
   const submit = form.querySelector<HTMLButtonElement>('[data-submit]');
@@ -97,13 +134,13 @@ function wireForm(form: HTMLFormElement, endpoint: string): void {
 
     if (submit) submit.disabled = true;
     setStatus('Sending');
-    const payload = Object.fromEntries(new FormData(form).entries());
+    const payload: Record<string, string> = {};
+    for (const [name, value] of new FormData(form).entries()) {
+      if (typeof value !== 'string' || (name !== 'botcheck' && value.trim() === '')) continue;
+      payload[WEB3FORMS_FIELDS.has(name) ? name : (EMAIL_LABELS[name] ?? name)] = value.trim();
+    }
 
     try {
-      // ------------------------------------------------------------------
-      // STUB: set the endpoints in config.ts and SIMULATE_SUBMIT to false.
-      // Each endpoint should accept JSON and return 2xx on success.
-      // ------------------------------------------------------------------
       if (SIMULATE_SUBMIT) {
         await wait(900);
       } else {
@@ -112,7 +149,10 @@ function wireForm(form: HTMLFormElement, endpoint: string): void {
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(payload),
         });
-        if (!response.ok) throw new Error(`Form failed: ${response.status}`);
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || result.success === false) {
+          throw new Error(`Form failed: ${response.status} ${result.message ?? ''}`);
+        }
       }
 
       setStatus('');
@@ -149,6 +189,7 @@ export function initQuoteForm(form: HTMLFormElement): QuoteForm {
   const panels = Array.from(form.querySelectorAll<HTMLFieldSetElement>('[data-panel]'));
   const typeInput = form.querySelector<HTMLInputElement>('[data-type-input]')!;
   const cta = form.querySelector<HTMLButtonElement>('[data-quote-cta]')!;
+  const subject = form.querySelector<HTMLInputElement>('[data-subject]');
 
   function selectTab(name: string, focus = false) {
     tabs.forEach((tab) => {
@@ -164,6 +205,7 @@ export function initQuoteForm(form: HTMLFormElement): QuoteForm {
       if (active) gsap.fromTo(panel, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power2.out' });
     });
     typeInput.value = name;
+    if (subject) subject.value = SUBJECTS[name] ?? subject.value;
     cta.textContent = CTA_LABELS[name] ?? cta.textContent;
   }
 
@@ -225,12 +267,12 @@ export function initQuoteForm(form: HTMLFormElement): QuoteForm {
     });
   });
 
-  wireForm(form, QUOTE_ENDPOINT);
+  wireForm(form, FORM_ENDPOINT);
   return { selectTab: (tab: string) => selectTab(tab) };
 }
 
 export function initContactForm(form: HTMLFormElement): void {
-  wireForm(form, CONTACT_ENDPOINT);
+  wireForm(form, FORM_ENDPOINT);
 }
 
 // ---------------------------------------------------------------------------
