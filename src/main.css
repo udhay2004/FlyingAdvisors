@@ -1114,14 +1114,6 @@ textarea.field__input {
   margin: clamp(48px, 6vw, 80px) auto 0;
 }
 
-.network-map__caption {
-  margin-top: 14px;
-  font-size: 0.625rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--color-paper-dim);
-}
-
 .regions {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
