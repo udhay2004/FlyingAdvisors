@@ -5,9 +5,9 @@
 //
 // Source: public/assets/brand/logo-source.jpg (1536×1024, gold on black)
 // Output (public/assets/brand/):
-//   logo-mark.png / @2x   the FA emblem only, for the navigation bar
-//   logo-full.png / @2x   emblem + "FLYING ADVISORS" + star rule, for the footer
-//   favicon-32.png, apple-touch-icon.png   emblem on black, square
+//   fa-mark.png / @2x     the FA emblem only, for the navigation bar
+//   fa-logo.png / @2x     emblem + "FLYING ADVISORS" + star rule, for the footer
+//   fa-favicon-32.png, fa-apple-touch-icon.png   emblem on black, square
 // A vector (SVG) original from the designer will always be sharper.
 
 import { join, dirname } from 'node:path';
@@ -49,12 +49,12 @@ const full = await toTransparent(FULL);
 const write = (buffer, height, name) =>
   sharp(buffer).resize({ height }).png({ compressionLevel: 9 }).toFile(join(DIR, name));
 
-await write(emblem, 64, 'logo-mark.png');
-await write(emblem, 128, 'logo-mark@2x.png');
-await write(full, 140, 'logo-full.png');
-await write(full, 280, 'logo-full@2x.png');
+await write(emblem, 64, 'fa-mark.png');
+await write(emblem, 128, 'fa-mark@2x.png');
+await write(full, 140, 'fa-logo.png');
+await write(full, 280, 'fa-logo@2x.png');
 
-for (const [size, name] of [[32, 'favicon-32.png'], [180, 'apple-touch-icon.png']]) {
+for (const [size, name] of [[32, 'fa-favicon-32.png'], [180, 'fa-apple-touch-icon.png']]) {
   const pad = Math.round(size * 0.08);
   const inner = await sharp(emblem).resize(size - pad * 2, size - pad * 2, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).toBuffer();
   await sharp({ create: { width: size, height: size, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 1 } } })
@@ -63,7 +63,7 @@ for (const [size, name] of [[32, 'favicon-32.png'], [180, 'apple-touch-icon.png'
     .toFile(join(DIR, name));
 }
 
-for (const name of ['logo-mark.png', 'logo-full.png']) {
+for (const name of ['fa-mark.png', 'fa-logo.png']) {
   const m = await sharp(join(DIR, name)).metadata();
   console.log(name, `${m.width}×${m.height}`);
 }

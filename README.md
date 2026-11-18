@@ -100,12 +100,13 @@ Empty-leg `[Date]`, `[Seats]` and `[Price]`. Search `index.html` for `[` to find
 
 ## Logo
 
-`public/assets/brand/logo-source.jpg` is the supplied logo. Run
-`node scripts/build-logo.mjs` to regenerate `logo-mark.png` / `logo-mark@2x.png`:
-navy strokes become the site's off-white, the gold plane stays gold, and the
-background becomes transparent for the black header and footer. A vector
-(SVG) original will always be sharper; drop it in and point the two `<img>`
-tags (header `.brand__mark`, footer `.site-footer__mark`) at it.
+`public/assets/brand/logo-source.jpg` is the supplied logo (gold on black).
+Run `node scripts/build-logo.mjs` to regenerate the transparent versions:
+`fa-mark` (emblem, header), `fa-logo` (full lockup, footer) and the favicons.
+
+If the logo changes again, give the output files **new names** (and update
+`index.html`): Cloudflare caches images for hours, so reusing a file name can
+keep showing the old logo.
 
 ## Fleet card images
 
