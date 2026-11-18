@@ -1828,7 +1828,7 @@ textarea.field__input {
 
 .brand__mark {
   flex: none;
-  width: 46px;
+  width: auto;
   height: 46px;
 }
 
@@ -1838,9 +1838,11 @@ textarea.field__input {
   gap: 4px;
 }
 
-.site-footer__mark {
-  width: 88px;
-  height: 88px;
+.site-footer__logo {
+  display: block;
+  width: min(260px, 70vw);
+  height: auto;
+  margin-bottom: 8px;
 }
 
 @media (max-width: 640px) {
@@ -1849,7 +1851,7 @@ textarea.field__input {
   }
 
   .brand__mark {
-    width: 38px;
+    width: auto;
     height: 38px;
   }
 }
@@ -2342,8 +2344,8 @@ a.contact-item__value:hover {
   }
 
   .brand__mark {
-    width: 34px;
-    height: 34px;
+    width: auto;
+    height: 32px;
   }
 
   .brand__name {

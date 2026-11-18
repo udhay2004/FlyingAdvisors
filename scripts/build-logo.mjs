@@ -1,48 +1,69 @@
-// Converts the supplied logo (navy strokes + gold plane on a light background)
-// into a transparent version for dark backgrounds: navy becomes the site's
-// off-white, gold stays gold, the background becomes transparent.
+// Turns the supplied logo (gold on black) into transparent PNGs for the site.
+// Black becomes transparent; the gold keeps its exact colour and soft edges.
 //
 //   node scripts/build-logo.mjs
 //
-// Source: public/assets/brand/logo-source.jpg
-// Output: public/assets/brand/logo-mark.png (and @2x), trimmed and square.
-// A vector (SVG) original from the designer will always be sharper; drop it in
-// as public/assets/brand/logo-mark.svg and point the <img> tags at it.
+// Source: public/assets/brand/logo-source.jpg (1536×1024, gold on black)
+// Output (public/assets/brand/):
+//   logo-mark.png / @2x   the FA emblem only, for the navigation bar
+//   logo-full.png / @2x   emblem + "FLYING ADVISORS" + star rule, for the footer
+//   favicon-32.png, apple-touch-icon.png   emblem on black, square
+// A vector (SVG) original from the designer will always be sharper.
 
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 
 const DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'public', 'assets', 'brand');
-const PAPER = [237, 232, 223];
-const BG_LUMA = 247;
+const SOURCE = join(DIR, 'logo-source.jpg');
+const BLACK = 14; // JPEG noise floor of the background
 
-const { data, info } = await sharp(join(DIR, 'logo-source.jpg')).removeAlpha().raw().toBuffer({ resolveWithObject: true });
-const out = Buffer.alloc(info.width * info.height * 4);
+// Regions of the source image (left, top, width, height).
+const EMBLEM = { left: 440, top: 190, width: 660, height: 390 };
+const FULL = { left: 180, top: 190, width: 1176, height: 560 };
 
-for (let i = 0, o = 0; i < data.length; i += 3, o += 4) {
-  const r = data[i], g = data[i + 1], b = data[i + 2];
-  const luma = 0.299 * r + 0.587 * g + 0.114 * b;
-  const isGold = r - b > 45;
-  if (isGold) {
-    // Gold plane: keep its colour, fade antialiased edges into transparency.
-    const a = Math.min(1, Math.max(0, (BG_LUMA - luma) / (BG_LUMA - 145)));
-    out[o] = 183; out[o + 1] = 155; out[o + 2] = 98; out[o + 3] = Math.round(a * 255);
-  } else {
-    const a = Math.min(1, Math.max(0, (BG_LUMA - luma) / (BG_LUMA - 30)));
-    out[o] = PAPER[0]; out[o + 1] = PAPER[1]; out[o + 2] = PAPER[2]; out[o + 3] = Math.round(a * 255);
+async function toTransparent(region) {
+  const { data, info } = await sharp(SOURCE).extract(region).removeAlpha().raw().toBuffer({ resolveWithObject: true });
+  const out = Buffer.alloc(info.width * info.height * 4);
+  for (let i = 0, o = 0; i < data.length; i += 3, o += 4) {
+    const r = data[i], g = data[i + 1], b = data[i + 2];
+    const peak = Math.max(r, g, b);
+    // Brightness above the black floor becomes opacity...
+    const a = Math.min(1, Math.max(0, (peak - BLACK) / (200 - BLACK)));
+    // ...and the colour is un-darkened so faint edges stay gold, not brown.
+    const k = a > 0 ? Math.min(255 / Math.max(peak, 1), 1 / a) : 0;
+    out[o] = Math.min(255, Math.round(r * k));
+    out[o + 1] = Math.min(255, Math.round(g * k));
+    out[o + 2] = Math.min(255, Math.round(b * k));
+    out[o + 3] = Math.round(a * 255);
   }
+  return sharp(out, { raw: { width: info.width, height: info.height, channels: 4 } })
+    .trim({ threshold: 4 })
+    .png()
+    .toBuffer();
 }
 
-const trimmed = await sharp(out, { raw: { width: info.width, height: info.height, channels: 4 } })
-  .trim({ threshold: 1 })
-  .png()
-  .toBuffer();
+const emblem = await toTransparent(EMBLEM);
+const full = await toTransparent(FULL);
 
-for (const [size, name] of [[96, 'logo-mark.png'], [192, 'logo-mark@2x.png']]) {
-  await sharp(trimmed)
-    .resize(size, size, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
+const write = (buffer, height, name) =>
+  sharp(buffer).resize({ height }).png({ compressionLevel: 9 }).toFile(join(DIR, name));
+
+await write(emblem, 64, 'logo-mark.png');
+await write(emblem, 128, 'logo-mark@2x.png');
+await write(full, 140, 'logo-full.png');
+await write(full, 280, 'logo-full@2x.png');
+
+for (const [size, name] of [[32, 'favicon-32.png'], [180, 'apple-touch-icon.png']]) {
+  const pad = Math.round(size * 0.08);
+  const inner = await sharp(emblem).resize(size - pad * 2, size - pad * 2, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } }).toBuffer();
+  await sharp({ create: { width: size, height: size, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 1 } } })
+    .composite([{ input: inner, left: pad, top: pad }])
     .png({ compressionLevel: 9 })
     .toFile(join(DIR, name));
 }
-console.log('Logo written.');
+
+for (const name of ['logo-mark.png', 'logo-full.png']) {
+  const m = await sharp(join(DIR, name)).metadata();
+  console.log(name, `${m.width}×${m.height}`);
+}
