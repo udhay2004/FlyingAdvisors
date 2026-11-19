@@ -23,7 +23,7 @@ _Last updated: 19 November 2026_
 |---|---|
 | `robots.txt`: explicit `Allow: /` for search engines, AI search/answer bots and AI training bots in separate commented groups; `Sitemap:` line | `public/robots.txt` |
 | `sitemap.xml`: homepage, with `lastmod` | `public/sitemap.xml` |
-| Real 404s: unknown URLs return status 404 and a branded, `noindex` page instead of a copy of the homepage | `Staticfile` (`index_fallback: false`), `404.html`, `src/notfound.ts` |
+| Real 404s: unknown URLs return status 404 and a branded, `noindex` page instead of a copy of the homepage | `Caddyfile` (Railway web server config), `Staticfile`, `404.html`, `src/notfound.ts` |
 | Absolute asset paths (`base: '/'`) so pages at deeper URLs load correctly | `vite.config.ts` |
 | Canonical tag; descriptive title and meta description | `index.html` |
 | Open Graph and Twitter tags with a 1200×630 share image | `index.html`, `public/assets/share/og-home-v1.jpg`, `scripts/build-share-image.mjs` |
@@ -39,10 +39,13 @@ _Last updated: 19 November 2026_
 - No asset links are broken.
 - Lighthouse mobile, local build: SEO 100 (was 92), Performance 80, Accessibility 95, Best Practices 100.
 
-**Pending live check after push:**
+**Live check, after deploy on 19 Nov:**
 
-1. `curl -sI https://flyingadvisors.com/no-such-page` should return `404`. If it still returns 200, Railway isn't reading `Staticfile`. Fix: set the service variable `RAILPACK_NO_SPA=1` or add a Caddyfile.
-2. `/robots.txt` must return `text/plain`. Cloudflare cached the old HTML version for up to 4 hours, so purge it if needed.
+- Every bot gets `200` on `/` and a real `404` on unknown URLs.
+- `/sitemap.xml` is live.
+- The share image is live.
+- Railway served the 404 with an **empty body**, so `Caddyfile` was added to serve the branded `404.html` with status 404. It needs a re-check after its deploy.
+- `/robots.txt` was still Cloudflare's cached copy of the old homepage (cache age 848 s of 14,400). It clears by itself within 4 hours, or immediately with a purge (Caching → Purge Cache → Custom: `https://flyingadvisors.com/robots.txt`).
 
 ## Owner actions required
 
