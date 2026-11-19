@@ -2,8 +2,25 @@
 
 Living log. Read this first at the start of every session; update it at the end.
 Audit and rationale: [seo-audit.md](seo-audit.md). Open questions: [owner-questions.md](owner-questions.md).
+Owner guides: [webmaster-setup.md](webmaster-setup.md), [local-seo-checklist.md](local-seo-checklist.md), [geo-plan.md](geo-plan.md), [claims-to-verify.md](claims-to-verify.md).
 
 _Last updated: 19 November 2026_
+
+## Done checklist (from the brief)
+
+| Item | Status |
+|---|---|
+| Every major bot gets 200 and full HTML on all public URLs | Done, verified live as Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot, Claude-SearchBot, PerplexityBot and CCBot. Real verified-bot blocking can only be confirmed in Cloudflare (owner). |
+| robots.txt allows search and AI crawlers and lists the sitemap | Done in code. **Blocked on owner:** Cloudflare still serves its stale cached copy; purge it. |
+| sitemap.xml valid and ready to submit | Done: 22 URLs, generated every build. |
+| llms.txt and llms-full.txt live | Done. |
+| Every page has a unique title, description, canonical and one H1 | Done (automated check across 22 pages). |
+| JSON-LD valid on all page types, with no fabricated data | Done: everything parses, and only site facts are used. A fuller Organization (hours, `sameAs`, legal name) is **blocked on owner** answers. |
+| All services, aircraft categories and key cities/routes have real indexable pages | Services and aircraft: done. Cities and routes: **blocked on owner** facts (`geo-plan.md`). |
+| No placeholder text or dead (#top) legal links | Done. The Terms page is **blocked on owner** legal details. |
+| Lighthouse mobile: SEO 100, Accessibility 95+, Best Practices 95+, Performance 85+ | Performance 93–96, Accessibility 100 and Best Practices 100, all live. SEO is 100 locally and 92 live, **only** because of the stale robots.txt (purge it). |
+| Cloudflare checklist delivered | Done: `seo-audit.md` section 5. |
+| docs/seo-progress.md up to date | Done. |
 
 ## Status by phase
 
@@ -14,8 +31,8 @@ _Last updated: 19 November 2026_
 | 2. Site architecture | **Done and verified live (21 pages).** City and route pages and Terms wait on the owner. |
 | 3. Structured data | Partly done: BreadcrumbList, WebPage, FAQPage and Service on inner pages; WebSite and an @id on the homepage. Organization details still need owner facts. |
 | 4. AIO | **Done and verified live.** `llms.txt` and `llms-full.txt` are generated with every build. Every inner page opens with a direct answer and has its own FAQ. |
-| 5. Technical and performance | **Done in code, not yet pushed.** Homepage mobile Performance is 88–89 locally; Accessibility, Best Practices and SEO are 100. |
-| 6. Local / GEO | Not started |
+| 5. Technical and performance | **Done and verified live.** Homepage mobile Performance is 93–96 live; Accessibility and Best Practices are 100. |
+| 6. Local / GEO | **Done** (guides and IndexNow set up). The remaining steps are owner actions. |
 
 ## Phase 1: what changed
 
@@ -169,15 +186,54 @@ Accessibility, Best Practices and SEO were all 100 in every run. CLS stayed 0. T
 - **CSP:** the site uses inline JSON-LD and a small inline script, and Cloudflare injects scripts of its own. A strict policy needs testing against Cloudflare's injections first.
 - **HSTS preload and includeSubDomains:** they wait until `www` is set up.
 
+## Phase 5: live check (19 Nov)
+
+- The deploy passed the `/health` check.
+- Security headers are present.
+- Hashed JS is served with a 1-year immutable cache; pages with 5 minutes.
+- The 404 page still works.
+
+**Lighthouse mobile, live:**
+
+| Page | Performance | Accessibility | Best Practices | SEO |
+|---|---|---|---|---|
+| Homepage | 93–96 (FCP 2.0–2.1 s, LCP 2.3–2.5 s, TBT 40–120 ms, CLS 0) | 100 | 100 | 92 (the only failing audit is `robots-txt`: Cloudflare's stale copy) |
+| `/private-jet-charter/` | 98 | 100 | 100 | 92 (same cause) |
+| `/aircraft/` | 88 | 100 | 100 | 92 (same cause) |
+
+Photos still showed Cloudflare's old 4-hour cache header (`max-age=14400`), served from cache. They pick up the new 1-week header when their cache entries expire.
+
+## Phase 6: what changed
+
+| Deliverable | File |
+|---|---|
+| Google Search Console, Bing Webmaster Tools and IndexNow steps, plus what to monitor | `docs/webmaster-setup.md` |
+| IndexNow key file (live at `/ef066ede983405664fcfbb8db91c300b.txt` after deploy) and a submit script (`npm run indexnow`, run by the owner after page changes) | `public/ef066ede983405664fcfbb8db91c300b.txt`, `scripts/indexnow.mjs` |
+| Google Business Profile steps for the Noida office, the exact name/address/phone to use everywhere, directories to claim, and things to avoid | `docs/local-seo-checklist.md` |
+| hreflang rules (none until real translations exist), and the plan for city and route pages | `docs/geo-plan.md` |
+| Every claim on the site that needs owner confirmation, with where it appears | `docs/claims-to-verify.md` |
+
+**Already on the site:** the Contact page has a Google Maps directions link and a service-area section. The Google Map embed is deliberately left out, for speed and to avoid third-party cookies; it can be added once a Business Profile exists.
+
+**Nothing was submitted to Google, Bing or IndexNow, and no listings were created.** Those are owner actions.
+
 ## Owner actions required
 
 - [ ] **Purge `https://flyingadvisors.com/robots.txt` in Cloudflare** (Caching → Configuration → Purge Cache → Custom Purge). The stale copy is still being served.
 - [ ] Cloudflare checklist: `seo-audit.md` section 5. Covers the AI crawler settings, Bot Fight Mode, Email Obfuscation, HSTS, the `www` record and redirect, and the cache purge.
 - [ ] Answer `owner-questions.md`. It blocks city and route pages, empty legs, legal pages and some schema.
-- [ ] Google Search Console and Bing Webmaster Tools: submit `https://flyingadvisors.com/sitemap.xml`. Steps will come in Phase 6 as `webmaster-setup.md`.
+- [ ] Google Search Console and Bing Webmaster Tools: verify the site and submit the sitemap (`webmaster-setup.md`).
+- [ ] Google Business Profile, Bing Places and Apple Business Connect (`local-seo-checklist.md`).
+- [ ] Confirm or correct the claims in `claims-to-verify.md`.
+- [ ] After the next page changes are deployed: `npm run indexnow`.
 
 ## Next recommended steps
 
-1. **Push Phase 5 and verify it live:** the deploy passes the health check, response headers are present, and live Lighthouse is re-measured.
-2. **Phase 3:** a fuller Organization / ProfessionalService for the Noida office (`openingHours`, `sameAs` and legal name, once the owner answers).
-5. **Phase 6:** Google Business Profile and citations checklist, plus Search Console and Bing setup.
+1. **Owner:** purge robots.txt in Cloudflare, then set up Search Console and Bing.
+2. **Owner:** answer `owner-questions.md` and `claims-to-verify.md`.
+3. **Then:**
+   - city and route pages (`geo-plan.md`)
+   - Terms page
+   - fuller Organization JSON-LD (`openingHours`, `sameAs`, legal name)
+   - Business Profile link on the Contact page
+4. Re-run Lighthouse and the bot checks after each batch. Keep this log updated.
