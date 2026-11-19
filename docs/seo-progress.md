@@ -13,8 +13,8 @@ _Last updated: 19 November 2026_
 | 1. Crawler access | **Done and verified live.** Only Cloudflare's cached robots.txt remains (clears itself or via purge). |
 | 2. Site architecture | **Done and verified live (21 pages).** City and route pages and Terms wait on the owner. |
 | 3. Structured data | Partly done: BreadcrumbList, WebPage, FAQPage and Service on inner pages; WebSite and an @id on the homepage. Organization details still need owner facts. |
-| 4. AIO | **Done in code, not yet pushed.** `llms.txt` and `llms-full.txt` are generated with every build. Every inner page opens with a direct answer and has its own FAQ. |
-| 5. Technical and performance | Partly done: share tags, dim-text contrast raised to 4.5:1, quote-form heading order. Performance work is not started. |
+| 4. AIO | **Done and verified live.** `llms.txt` and `llms-full.txt` are generated with every build. Every inner page opens with a direct answer and has its own FAQ. |
+| 5. Technical and performance | **Done in code, not yet pushed.** Homepage mobile Performance is 88–89 locally; Accessibility, Best Practices and SEO are 100. |
 | 6. Local / GEO | Not started |
 
 ## Phase 1: what changed
@@ -134,6 +134,41 @@ Both files rebuild automatically from the page content, so they can't drift out 
 
 **Not changed on purpose:** the homepage hero copy ("The world moves on schedules you don't have to.") is the approved brand voice. AI tools get the plain description from the meta description, the JSON-LD and `llms.txt`.
 
+## Phase 5: what changed
+
+| Change | Why | File |
+|---|---|---|
+| The hero photo is visible from the first paint; the intro only settles its scale (it used to fade in from black) | It is the page's largest element, so LCP now measures the photo as soon as it loads | `src/main.css`, `src/app.ts` |
+| The animation code (GSAP, Lenis, forms; about 150 KB) loads just after the first paint, via `src/main.ts` → `import('./app')` | It used to run before anything appeared on screen | `src/main.ts`, `src/app.ts` |
+| Below-the-fold work (heading splits, scroll reveals, parallax) waits for browser idle time | It no longer competes with the hero intro on slow phones | `src/app.ts` |
+| Cache headers: hashed JS/CSS/fonts for 1 year (immutable); photos and logos for 1 week; pages, robots.txt, sitemap and llms files for 5 minutes | Stops Cloudflare holding stale files for 4 hours (the robots.txt problem) | `Caddyfile` |
+| Security headers: HSTS (6 months, no subdomains), Referrer-Policy, X-Frame-Options, Permissions-Policy | Best practice | `Caddyfile` |
+| Railway health check on `/health` | A broken server config can never replace the working site | `railway.json` |
+| Quote form: the `tabpanel` role moved from `<fieldset>` to a wrapper `<div>` | ARIA validity | `index.html`, `src/forms.ts` |
+
+**Lighthouse mobile, homepage:**
+
+| Version | Performance | FCP | LCP | TBT |
+|---|---|---|---|---|
+| Live baseline (Phase 0) | 70 | 1.9 s | 3.8 s | 570 ms |
+| Live before Phase 5 (with Phase 1–2) | 81–83 | 1.9–2.1 s | 3.4–3.8 s | 110–270 ms |
+| Phase 5, local with gzip, 3 runs | **88–89** | 2.2 s | 3.4 s | 70–80 ms |
+
+Accessibility, Best Practices and SEO were all 100 in every run. CLS stayed 0. The live number needs re-measuring after the push, behind Cloudflare.
+
+**Checked:**
+
+- The intro plays on desktop and mobile.
+- Quote tabs switch, and only the visible tab's fields are validated or submitted.
+- `?enquiry=` still opens the right tab.
+- No horizontal overflow at 390 px.
+- The page check is clean.
+
+**Not done, on purpose:**
+
+- **CSP:** the site uses inline JSON-LD and a small inline script, and Cloudflare injects scripts of its own. A strict policy needs testing against Cloudflare's injections first.
+- **HSTS preload and includeSubDomains:** they wait until `www` is set up.
+
 ## Owner actions required
 
 - [ ] **Purge `https://flyingadvisors.com/robots.txt` in Cloudflare** (Caching → Configuration → Purge Cache → Custom Purge). The stale copy is still being served.
@@ -143,9 +178,6 @@ Both files rebuild automatically from the page content, so they can't drift out 
 
 ## Next recommended steps
 
-1. **Push Phase 4 and verify it live:** `/llms.txt` and `/llms-full.txt` should return `text/plain`.
+1. **Push Phase 5 and verify it live:** the deploy passes the health check, response headers are present, and live Lighthouse is re-measured.
 2. **Phase 3:** a fuller Organization / ProfessionalService for the Noida office (`openingHours`, `sameAs` and legal name, once the owner answers).
-4. **Phase 5:**
-   - homepage performance: show the hero text without waiting for the intro animation, and lighten the main script
-   - `role="tabpanel"` on `<fieldset>`
 5. **Phase 6:** Google Business Profile and citations checklist, plus Search Console and Bing setup.

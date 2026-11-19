@@ -200,6 +200,8 @@ export function initQuoteForm(form: HTMLFormElement): QuoteForm {
     });
     panels.forEach((panel) => {
       const active = panel.dataset.panel === name;
+      const tabpanel = panel.closest<HTMLElement>('[role="tabpanel"]');
+      if (tabpanel) tabpanel.hidden = !active;
       panel.hidden = !active;
       panel.disabled = !active; // hidden fields are skipped by validation and FormData
       if (active) gsap.fromTo(panel, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power2.out' });

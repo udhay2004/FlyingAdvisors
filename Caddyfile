@@ -31,9 +31,29 @@
 	header {
 		# Prevent some browsers from MIME-sniffing a response away from the declared Content-Type
 		X-Content-Type-Options "nosniff"
+		# HTTPS only for 6 months (subdomains not included until www is set up)
+		Strict-Transport-Security "max-age=15552000"
+		# Send only the origin to other sites
+		Referrer-Policy "strict-origin-when-cross-origin"
+		# Don't allow the site to be framed by other sites
+		X-Frame-Options "SAMEORIGIN"
+		# The site uses none of these browser features
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
 		# Remove Server header
 		-Server
 	}
+
+	# Caching. Cloudflare follows these, so a changed robots.txt or page shows
+	# within minutes instead of hours.
+	#   Vite's hashed files (/assets/name-HASH.js|css|woff2): cache for a year.
+	@hashed path_regexp hashed ^/assets/[^/]+\.(js|css|woff2?)$
+	header @hashed Cache-Control "public, max-age=31536000, immutable"
+	#   Photos, logos and share images: a week (rename a file when replacing it).
+	@media path_regexp media ^/assets/(photos|fleet|brand|share)/
+	header @media Cache-Control "public, max-age=604800"
+	#   Pages, robots.txt, sitemap.xml, llms.txt: five minutes.
+	@docs not path /assets/*
+	header @docs Cache-Control "public, max-age=300"
 
 	# serve from the 'dist' folder (Vite builds into the 'dist' folder)
 	root * {{.DIST_DIR}}

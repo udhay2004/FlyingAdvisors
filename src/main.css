@@ -1486,9 +1486,12 @@ textarea.field__input {
    ========================================================================== */
 
 
+/* The hero photo is visible from the first paint (it is the page's largest
+   element, so this is what Largest Contentful Paint measures). The intro only
+   settles its scale. */
 .has-motion .hero__img {
-  opacity: 0;
-  will-change: transform, opacity; /* removed after the intro */
+  transform: scale(1.06);
+  will-change: transform; /* removed after the intro */
 }
 
 .has-motion .hero__headline,

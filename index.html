@@ -219,7 +219,8 @@
               <input type="hidden" name="type" value="fly" data-type-input />
 
               <!-- Fly -->
-              <fieldset class="quote-form__panel" id="panel-fly" role="tabpanel" aria-labelledby="tab-fly" data-panel="fly">
+              <div class="quote-form__tabpanel" id="panel-fly" role="tabpanel" aria-labelledby="tab-fly">
+              <fieldset class="quote-form__panel" data-panel="fly">
                 <div class="pills" role="radiogroup" aria-label="Trip type">
                   <label class="pill"><input type="radio" name="trip" value="one-way" checked data-trip /><span>One-way</span></label>
                   <label class="pill"><input type="radio" name="trip" value="return" data-trip /><span>Return</span></label>
@@ -289,9 +290,11 @@
                   </div>
                 </div>
               </fieldset>
+              </div>
 
               <!-- Buy -->
-              <fieldset class="quote-form__panel" id="panel-buy" role="tabpanel" aria-labelledby="tab-buy" data-panel="buy" hidden disabled>
+              <div class="quote-form__tabpanel" id="panel-buy" role="tabpanel" aria-labelledby="tab-buy" hidden>
+              <fieldset class="quote-form__panel" data-panel="buy" disabled>
                 <div class="field" data-field>
                   <label class="field__label" for="q-mission">Typical mission</label>
                   <input class="field__input" id="q-mission" name="mission" type="text" required placeholder="e.g. Mumbai–London non-stop, 8 guests" aria-describedby="q-mission-error" />
@@ -313,9 +316,11 @@
                   </div>
                 </div>
               </fieldset>
+              </div>
 
               <!-- Sell -->
-              <fieldset class="quote-form__panel" id="panel-sell" role="tabpanel" aria-labelledby="tab-sell" data-panel="sell" hidden disabled>
+              <div class="quote-form__tabpanel" id="panel-sell" role="tabpanel" aria-labelledby="tab-sell" hidden>
+              <fieldset class="quote-form__panel" data-panel="sell" disabled>
                 <div class="field" data-field>
                   <label class="field__label" for="q-model">Aircraft make &amp; model</label>
                   <input class="field__input" id="q-model" name="model" type="text" required placeholder="e.g. Challenger 350" aria-describedby="q-model-error" />
@@ -337,6 +342,7 @@
                   </div>
                 </div>
               </fieldset>
+              </div>
 
               <div class="field" data-field>
                 <label class="field__label" for="q-mobile">Mobile or WhatsApp</label>
