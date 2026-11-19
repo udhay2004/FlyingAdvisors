@@ -10,7 +10,7 @@ _Last updated: 19 November 2026_
 | Phase | Status |
 |---|---|
 | 0. Audit | Done: `docs/seo-audit.md` |
-| 1. Crawler access | **Done in code; live check pending** (see below) |
+| 1. Crawler access | **Done and verified live.** Only Cloudflare's cached robots.txt remains (clears itself or via purge). |
 | 2. Site architecture (inner pages, legal, 404) | 404 done. The rest is not started. |
 | 3. Structured data | Not started (existing TravelAgency JSON-LD is valid) |
 | 4. AIO (`llms.txt`, answer-first copy) | Not started |
@@ -44,7 +44,7 @@ _Last updated: 19 November 2026_
 - Every bot gets `200` on `/` and a real `404` on unknown URLs.
 - `/sitemap.xml` is live.
 - The share image is live.
-- Railway served the 404 with an **empty body**, so `Caddyfile` was added to serve the branded `404.html` with status 404. It needs a re-check after its deploy.
+- Railway first served the 404 with an empty body. `Caddyfile` fixed it: unknown URLs now return status 404 with the branded page. Verified live, with styles loading.
 - `/robots.txt` was still Cloudflare's cached copy of the old homepage (cache age 848 s of 14,400). It clears by itself within 4 hours, or immediately with a purge (Caching → Purge Cache → Custom: `https://flyingadvisors.com/robots.txt`).
 
 ## Owner actions required
