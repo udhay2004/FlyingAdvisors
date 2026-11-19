@@ -280,17 +280,18 @@ export function initContactForm(form: HTMLFormElement): void {
 // ---------------------------------------------------------------------------
 
 export function initFaq(root: HTMLElement): void {
-  const buttons = Array.from(root.querySelectorAll<HTMLButtonElement>('button[aria-controls]'));
-  buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      const opening = button.getAttribute('aria-expanded') !== 'true';
-      buttons.forEach((other) => {
-        const panel = document.getElementById(other.getAttribute('aria-controls')!)!;
-        const open = other === button && opening;
-        other.setAttribute('aria-expanded', String(open));
-        panel.hidden = !open;
-        if (open) gsap.fromTo(panel, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
+  // Native <details>: every answer is in the HTML for crawlers and works
+  // without JavaScript. This only keeps one open at a time (for browsers
+  // without <details name>) and fades the answer in.
+  const items = Array.from(root.querySelectorAll<HTMLDetailsElement>('details'));
+  items.forEach((item) => {
+    item.addEventListener('toggle', () => {
+      if (!item.open) return;
+      items.forEach((other) => {
+        if (other !== item && other.open) other.open = false;
       });
+      const answer = item.querySelector('.faq__a');
+      if (answer) gsap.fromTo(answer, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' });
     });
   });
 }

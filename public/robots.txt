@@ -1,0 +1,51 @@
+# robots.txt for https://flyingadvisors.com
+# Flying Advisors welcomes search engines and AI assistants. Every public page
+# may be crawled, indexed, cited and summarised. Nothing private is served
+# from this site: the forms post to a third-party service, so there are no
+# admin, account or thank-you pages to hide.
+#
+# Note: Cloudflare can override this file ("Managed robots.txt", "Block AI
+# bots"). Keep those settings off; see docs/seo-audit.md, section 5.
+
+# --- Search engines -----------------------------------------------------------
+User-agent: Googlebot
+User-agent: Bingbot
+User-agent: Applebot
+User-agent: DuckDuckBot
+User-agent: YandexBot
+User-agent: Baiduspider
+Allow: /
+
+# --- AI search and answer engines (live answers that cite and link) ----------
+# OpenAI: ChatGPT search, and pages fetched when a user asks ChatGPT
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+# Anthropic: Claude search, and pages fetched when a user asks Claude
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+# Perplexity
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+# Others
+User-agent: DuckAssistBot
+User-agent: MistralAI-User
+Allow: /
+
+# --- AI model training and grounding ------------------------------------------
+# Allowed so the brand and services are known to AI assistants.
+# To opt out of training only, change "Allow: /" below to "Disallow: /".
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: Meta-ExternalAgent
+User-agent: Amazonbot
+User-agent: cohere-ai
+Allow: /
+
+# --- Everyone else ------------------------------------------------------------
+User-agent: *
+Allow: /
+
+Sitemap: https://flyingadvisors.com/sitemap.xml
