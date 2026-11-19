@@ -82,6 +82,17 @@ Each photo's crop point is set with `--focus` in `main.css`
 
 Empty-leg `[Date]`, `[Seats]` and `[Price]`. Search `index.html` for `[` to find them all.
 
+## Inner pages (services, aircraft, about, contact, FAQ, legal)
+
+All copy for these pages lives in `content/pages.mjs`. `npm run build` runs
+`scripts/build-pages.mjs` after Vite, which writes each page as static HTML
+into `dist/` and regenerates `dist/sitemap.xml`.
+
+- To add a page, add an object to `content/pages.mjs`. It gets a sitemap entry
+  automatically. Link to it from at least one other page.
+- These pages exist only in the build, not under `npm run dev`. To check them,
+  run `npm run build`, then `npx vite preview`.
+
 ## Config (`src/config.ts`)
 
 - Forms: both forms (quote and contact) are emailed through Web3Forms. The

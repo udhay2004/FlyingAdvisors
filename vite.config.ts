@@ -8,10 +8,14 @@ export default defineConfig({
   build: {
     target: 'es2022',
     assetsInlineLimit: 0,
+    // scripts/build-pages.mjs reads the manifest to link the inner-page bundle.
+    manifest: true,
     rollupOptions: {
       input: {
         main: resolve(import.meta.dirname, 'index.html'),
         notFound: resolve(import.meta.dirname, '404.html'),
+        // Inner pages are written by scripts/build-pages.mjs after this build.
+        inner: resolve(import.meta.dirname, 'src/inner.ts'),
       },
     },
   },

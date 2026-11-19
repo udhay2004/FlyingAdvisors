@@ -34,3 +34,10 @@ _Last updated: 19 November 2026_
 17. Year founded, and the founder or team names, if you want them on the About page. Real people strengthen E-E-A-T.
 18. Real social profile URLs (LinkedIn, Instagram, X, YouTube), for `sameAs`.
 19. Is there a Google Business Profile already? If so, its link.
+
+## Please review (pages written in Phase 2)
+
+20. **Privacy and Cookie pages** (`/privacy/`, `/cookies/`). They describe what the site actually does, but have not had a legal review. Please check them, especially if you operate under specific contracts or regulators.
+21. **Medical flights page.** It says air-ambulance and repatriation flights are arranged through specialist operators, which matches the homepage. Confirm this is accurate.
+22. **Aircraft guide figures.** Ranges and speeds are general, indicative industry figures for typical models. Tell us if you'd rather show none.
+

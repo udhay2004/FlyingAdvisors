@@ -311,6 +311,10 @@ function scrollToHash(hash: string, immediate = false): void {
 }
 
 const quoteForm = initQuoteForm(must<HTMLFormElement>('[data-quote-form]'));
+
+// Links from inner pages can open a specific tab: /?enquiry=buy#quote
+const enquiry = new URLSearchParams(location.search).get('enquiry');
+if (enquiry === 'fly' || enquiry === 'buy' || enquiry === 'sell') quoteForm.selectTab(enquiry);
 initContactForm(must<HTMLFormElement>('[data-contact-form]'));
 initFaq(must<HTMLElement>('[data-faq]'));
 
