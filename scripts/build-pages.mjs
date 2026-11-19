@@ -1,5 +1,6 @@
 // Writes every inner page (services, aircraft, about, contact, FAQ, legal) as
-// static HTML into dist/, after `vite build`. Also writes dist/sitemap.xml.
+// static HTML into dist/, after `vite build`. Also writes dist/sitemap.xml,
+// dist/llms.txt and dist/llms-full.txt (plain-text maps for AI assistants).
 //
 //   npm run build        (runs this automatically)
 //
@@ -11,7 +12,7 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PAGES, SITE } from '../content/pages.mjs';
+import { ABOUT, PAGES, SITE } from '../content/pages.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
@@ -387,7 +388,108 @@ ${urls.map((p) => `  <url>\n    <loc>${abs(p.path)}</loc>\n    <lastmod>${p.upda
 `;
 await writeFile(join(DIST, 'sitemap.xml'), sitemap);
 
+// ---------------------------------------------------------------------------
+// llms.txt (curated map) and llms-full.txt (full text), per llmstxt.org
+// ---------------------------------------------------------------------------
+
+const decode = (t) =>
+  t.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+
+// Small HTML-to-Markdown converter for the markup used in content/pages.mjs.
+function toMarkdown(html) {
+  let md = html
+    .replace(/<a [^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g, (_, href, text) => {
+      const url = href.startsWith('/') ? SITE.url + href : href;
+      return `[${strip(text)}](${decode(url)})`;
+    })
+    .replace(/<h2[^>]*>([\s\S]*?)<\/h2>/g, (_, t) => `\n\n## ${strip(t)}\n\n`)
+    .replace(/<h3[^>]*>([\s\S]*?)<\/h3>/g, (_, t) => `\n\n### ${strip(t)}\n\n`)
+    .replace(/<tr>([\s\S]*?)<\/tr>/g, (_, row) => {
+      const cells = [...row.matchAll(/<t[hd][^>]*>([\s\S]*?)<\/t[hd]>/g)].map((m) => strip(m[1]));
+      return `\n- ${cells.join(' | ')}`;
+    })
+    .replace(/<dt>([\s\S]*?)<\/dt>\s*<dd>/g, (_, t) => `\n- ${strip(t)}: `)
+    .replace(/<li>([\s\S]*?)<\/li>/g, (_, t) => `\n- ${t.trim()}`)
+    .replace(/<(strong|b)>([\s\S]*?)<\/\1>/g, '**$2**')
+    .replace(/<br\s*\/?>/g, ', ')
+    .replace(/<\/(p|ul|ol|table|dl|div|section)>/g, '\n\n')
+    .replace(/<[^>]+>/g, '');
+  md = decode(md)
+    .split('\n')
+    .map((line) => line.replace(/[ \t]+/g, ' ').trim())
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n');
+  return md.trim();
+}
+
+const GROUPS = [
+  {
+    title: 'Services',
+    paths: ['/private-jet-charter/', '/empty-leg-flights/', '/group-charter/', '/air-ambulance-medical-flights/', '/buy-private-jet/', '/sell-private-jet/'],
+  },
+  { title: 'Aircraft guide', paths: PAGES.filter((p) => p.path.startsWith('/aircraft/')).map((p) => p.path) },
+  { title: 'Company', paths: ['/about/', '/contact/', '/faq/', '/for-operators/'] },
+  { title: 'Optional', paths: ['/privacy/', '/cookies/'] },
+];
+
+const pageFor = (path) => {
+  const p = BY_PATH.get(path);
+  if (!p) throw new Error(`llms.txt: page not found ${path}`);
+  return p;
+};
+
+const intro = [`> ${ABOUT.summary}`, '', ...ABOUT.facts.map((f) => `- ${f}`), ''];
+
+const llms = [
+  '# Flying Advisors',
+  '',
+  ...intro,
+  `Homepage: ${SITE.url}/ · Full text of the pages below: ${SITE.url}/llms-full.txt`,
+  '',
+  ...GROUPS.flatMap((g) => [
+    `## ${g.title}`,
+    '',
+    ...g.paths.map((path) => {
+      const p = pageFor(path);
+      return `- [${decode(strip(p.label))}](${abs(p.path)}): ${decode(p.summary)}`;
+    }),
+    '',
+  ]),
+].join('\n');
+
+const full = [
+  '# Flying Advisors: full text',
+  '',
+  ...intro,
+  `Source: ${SITE.url}/ · Generated ${SITE.updated}. Each section below is also a web page at the URL shown.`,
+  '',
+  ...GROUPS.flatMap((g) =>
+    g.paths.map((path) => {
+      const p = pageFor(path);
+      const faqs = (p.faqs ?? []).map((f) => `**${decode(strip(f.q))}**\n${decode(strip(f.a))}`).join('\n\n');
+      return [
+        '---',
+        '',
+        `# ${decode(strip(p.h1))}`,
+        '',
+        `URL: ${abs(p.path)}`,
+        `Last updated: ${p.updated ?? SITE.updated}`,
+        '',
+        decode(strip(p.answer)),
+        '',
+        toMarkdown(p.body),
+        faqs ? `\n## Frequently asked questions\n\n${faqs}` : '',
+        '',
+      ].join('\n');
+    }),
+  ),
+].join('\n');
+
+const tidy = (text) => text.replace(/\n{3,}/g, '\n\n').trim() + '\n';
+await writeFile(join(DIST, 'llms.txt'), tidy(llms));
+await writeFile(join(DIST, 'llms-full.txt'), tidy(full));
+
 // The manifest is a build artefact, not something to publish.
 await rm(join(DIST, '.vite'), { recursive: true, force: true });
 
-console.log(`Wrote ${PAGES.length} pages and sitemap.xml (${urls.length} URLs).`);
+console.log(`Wrote ${PAGES.length} pages, sitemap.xml (${urls.length} URLs), llms.txt and llms-full.txt.`);

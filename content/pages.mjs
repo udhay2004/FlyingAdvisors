@@ -22,6 +22,25 @@ export const SITE = {
   ogImage: '/assets/share/og-home-v1.jpg',
 };
 
+// Plain facts for /llms.txt and /llms-full.txt (AI assistants). Same rules as
+// the pages: only facts from the site, no unverified network figures.
+export const ABOUT = {
+  summary:
+    'Flying Advisors is an independent private aviation broker based in Noida, Uttar Pradesh, India, serving clients worldwide. It arranges private jet charter, empty leg flights, group and event charter, air-ambulance and medical repatriation flights, and aircraft acquisition and sales. It does not own or operate aircraft: certified operators fly every trip, and Flying Advisors acts as broker and agent for the client.',
+  facts: [
+    'Business type: independent private aviation broker and agent (not an airline or aircraft operator)',
+    'Services: on-demand private jet charter (one-way, return, multi-leg), empty legs, group and event charter, air-ambulance and medical repatriation, aircraft acquisition, aircraft sales, operator partnerships, corporate and family office travel',
+    'Aircraft categories arranged: turboprop, very light jet, light jet, midsize, super-midsize, heavy, ultra-long-range and VIP airliner',
+    'Operators: every flight is performed by an operator holding the required air operator certification in its country of registry (in India, a DGCA Non-Scheduled Operator permit), which keeps full operational control',
+    'Quotes: all-inclusive (aircraft, crew, fuel, fees, taxes, handling), optional extras listed separately',
+    'Office: A-143, Sector 63, Noida, Uttar Pradesh 201301, India',
+    'Phone and WhatsApp: +91 93543 73625',
+    'Global desk, WhatsApp only, 24/7: +1 863 512 1034',
+    'Email: concierge@flyingadvisors.com',
+    'Regions served: Americas, Europe, Middle East and Africa, India and South Asia, Asia-Pacific',
+  ],
+};
+
 const INDICATIVE =
   '<p class="page-note">Figures are indicative manufacturer-type values for typical models in the category. Real range and capacity depend on the exact aircraft, its cabin configuration, passengers, baggage, weather and the airports involved. Your advisor confirms the numbers for your specific trip.</p>';
 
